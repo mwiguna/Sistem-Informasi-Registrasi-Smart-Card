@@ -5,10 +5,6 @@ header('Access-Control-Allow-Headers: *');
 header('Content-Type: application/json');
 
 class apiController extends Controller {
-
-  public function tangkapPost(){
-    var_dump($_POST);
-  }
   
 
   /* ---------- Realtime --------- */
@@ -17,11 +13,13 @@ class apiController extends Controller {
   public function newMemberBC(){
     if(Security::valid($_POST['nim']) && Security::valid($_POST['id_registration'])){
       $registration = $this->model('Registration')
-                           ->select(['url'])
+                           ->select()
                            ->where('id', Security::decrypt($_POST['id_registration']))
                            ->execute();
 
-      $member = $this->model('Siakad')->select()->where('nim', Security::decrypt($_POST['nim']))->execute();
+      if($registration->privacy == 1) $data = ['*'];
+      else $data = ['nim', 'nama', 'prodi', 'fakultas'];
+      $member = $this->model('Siakad')->select($data)->where('nim', Security::decrypt($_POST['nim']))->execute();
 
       if($registration->url != "") $this->sendingWebHook(Security::decrypt($registration->url), $member);
       

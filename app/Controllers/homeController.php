@@ -16,16 +16,15 @@ class homeController extends Controller {
   }
 
   public function login(){
-  	$user = $this->model('User')->select()->where('username', $_POST['username'])->execute();
-    $organization = $this->model('Organization')->select()->where('id', $user->id_organization)->execute();
+  	$organization = $this->model('Organization')->select()->where('username', $_POST['username'])->execute();
 
-  	if(!empty($user)){
-  		if($this->verify($_POST['password'], $user->password)){
+  	if(!empty($organization)){
+  		if($this->verify($_POST['password'], $organization->password)){
         if($organization->verify == 1){
-          $_SESSION['id'] = $user->id;
+          $_SESSION['id'] = $organization->id;
 
-          if($user->role == 1) $this->redirect('home');
-          else $this->redirect('lihat_organisasi/'.Security::encrypt($user->id_organization));
+          if($organization->role == 1) $this->redirect('home');
+          else $this->redirect('lihat_organisasi/'.Security::encrypt($organization->id));
         } else $this->redirect('error/verify');
       } else $this->redirect('error/login');
   	} else $this->redirect('error/login');

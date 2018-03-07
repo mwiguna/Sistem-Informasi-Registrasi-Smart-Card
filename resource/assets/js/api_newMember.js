@@ -20,7 +20,7 @@
 		    			<td>${data.nama}</td>
 		    			<td>
 							<a href="../lihat_anggota/${msg.nim}" class="btn btn-primary">Lihat</a>
-							<a href="'../hapus_anggota/${msg.nim}" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+							<a href="../hapus_anggota/${msg.nim}" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
 						</td>
 		    		</tr>`
 		    	);

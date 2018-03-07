@@ -11,26 +11,22 @@ class organizationController extends Controller {
   }
 
   public function checkUsername(){
-    $user = $this->model('User')->select()->where('username', $_POST['username'])->execute();
+    $user = $this->model('Organization')->select()->where('username', $_POST['username'])->execute();
     if(!empty($user)) echo 1;
     else echo 0; 
   }
 
   public function register(){
     $organization = $this->model('Organization')->insert([
+            "username" => $_POST['username'],
+            "password" => $this->bcrypt($_POST['password']),
             "name"  => $_POST['name'],
             "nim"   => $_POST['nim'],
             "phone" => $_POST['phone'],
             "email" => $_POST['email'],
-          ])->lastId()->execute();
-
-    $user = $this->model('User')->insert([
-            "username" => $_POST['username'],
-            "password" => $this->bcrypt($_POST['password']),
-            "id_organization" => $organization,
           ])->execute();
 
-    if($user) $this->view('organization/success_registration');
+    if($organization) $this->view('organization/success_registration');
     else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
   }
 
@@ -40,10 +36,10 @@ class organizationController extends Controller {
 
   public function showOrganization($id){
     $this->middleware();
-    if(!Security::valid($id)) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id_organization));
+    if(!Security::valid($id)) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id));
     
     $id = Security::decrypt($id);
-    if(empty($id) && $id != $this->user()->id_organization && $this->user()->role != 1) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id_organization));
+    if(empty($id) && $id != $this->user()->id && $this->user()->role != 1) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id));
     
     $organization  = $this->model('Organization')->select()->where('id', $id)->execute();
     $registrations = $this->model('Registration')->select()->where('id_organization', $id)->get();
@@ -58,7 +54,7 @@ class organizationController extends Controller {
 
     $id = Security::decrypt($id);
     $registration = $this->model('Registration')->select()->where('id', $id)->execute();
-    if($registration->id_organization != $this->user()->id_organization && $this->user()->role != 1) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id_organization));
+    if($registration->id_organization != $this->user()->id && $this->user()->role != 1) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id));
     
     $members = $this->getDataMembers($registration->id);
 
@@ -95,7 +91,7 @@ class organizationController extends Controller {
   }
 
   public function processAddRegistration(){
-    $id_organization = $this->user()->id_organization;
+    $id_organization = $this->user()->id;
 
     $registration = $this->model('Registration')->insert([
             "title"           => $_POST['title'],
@@ -104,7 +100,7 @@ class organizationController extends Controller {
             "privacy"     => (isset($_POST['privacy'])) ? 1 : 0,
           ])->execute();
 
-    if($registration) $this->redirect("lihat_organisasi/".Security::encrypt($this->user()->id_organization));
+    if($registration) $this->redirect("lihat_organisasi/".Security::encrypt($this->user()->id));
     else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
   }
 
@@ -116,7 +112,7 @@ class organizationController extends Controller {
     $this->middleware();
     $registration = $this->model('Registration')->delete()->where('id', Security::decrypt($id))->execute();
 
-    if($registration) $this->redirect("lihat_organisasi/".Security::encrypt($this->user()->id_organization));
+    if($registration) $this->redirect("lihat_organisasi/".Security::encrypt($this->user()->id));
     else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
   }
 

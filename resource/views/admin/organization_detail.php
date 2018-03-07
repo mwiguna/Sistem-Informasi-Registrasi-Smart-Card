@@ -10,7 +10,7 @@
 		</tr>
 		<tr>
 			<td>Penanggung Jawab</td>
-			<td><a href="<?= url('lihat_anggota/'.Security::encrypt($user->nim)) ?>"><?= $user->nama ?></td>
+			<td><a href="<?= url('lihat_anggota/'.Security::encrypt($organization->nim)) ?>"><?= $user->nama ?></td>
 		</tr>
 		<tr>
 			<td>E-mail</td>
@@ -25,6 +25,5 @@
 			<td><?= date('j F Y', strtotime($organization->date)) ?></td>
 		</tr>
 	</table>
-
-	<a href="<?= url('approve_organization/'.$organization->id) ?>" class="btn btn-success" onclick="return confirm('Apakah yakin ingin menyetujui Organisasi ini?')">Setujui</a>
+	
 </div>

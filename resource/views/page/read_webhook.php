@@ -1,4 +1,4 @@
-<pre id="data"></pre>
+<div id="data"></div>
 
 <script>
 	conn.onmessage = function(msg){
@@ -9,7 +9,8 @@
 		  method: "POST",
 		  data: {nim: msg.nim, id_registration: msg.registrasi},
 		  success: function (data) {
-		  	$('#data').append(data);
+		  	$('#data').append(JSON.stringify(data));
+		  	console.log(data);
 	      },
 	      error: function (textStatus, errorThrown) {
 	        console.log(textStatus + errorThrown);

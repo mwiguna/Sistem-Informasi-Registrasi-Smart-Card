@@ -3,7 +3,7 @@
 	<h3>Daftar Registrasi</h3>
 	<h6><?= $organization->name ?></h6>
 
-	<?php if($organization->id == $auth->id_organization): ?>
+	<?php if($organization->id == $auth->id): ?>
 
 	<a href="<?= url('tambah_registrasi') ?>" class="btn btn-success col-2 mb-2">Tambah Registrasi</a>
 	<a href="<?= url('logout') ?>" class="btn btn-danger col-2 mb-2">Logout</a>

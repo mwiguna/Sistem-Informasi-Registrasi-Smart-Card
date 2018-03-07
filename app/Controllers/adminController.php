@@ -4,7 +4,7 @@ class adminController extends Controller {
 
   public function home(){
     $this->middleware();
-    $organizations = $this->model('Organization')->all();
+    $organizations = $this->model('Organization')->select()->where('role', 0)->get();
     return $this->view('admin/home', ['organizations' => $organizations]);
   }
 
@@ -59,16 +59,7 @@ class adminController extends Controller {
   
 
   public function middleware(){
-    if($this->user()->role != 1) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id_organization));
+    if($this->user()->role != 1) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id));
   }
-
-  /* -- */
-
-  public function organizationApproval(){
-    $organizations = $this->model('Organization')->all();
-  	return $this->view('admin/organization_approval', ['organizations' => $organizations]);
-  }
-
-  /* -- */
 
 }

@@ -12,7 +12,6 @@ $route->url("error/:type", "home", "error");
 
 $route->url("home", "admin", "home");
 $route->url("persetujuan_data",         "admin", "dataApproval");
-$route->url("persetujuan_organisasi",   "admin", "organizationApproval");
 $route->url("detail_organisasi/:id",    "admin", "organizationDetail");
 $route->url("detail_persetujuan/:id",   "admin", "approvalDetail");
 $route->url("approve_data/:id", 		"admin", "approveData");
@@ -34,13 +33,11 @@ $route->url("proses_tambah_registrasi", "organization", "processAddRegistration"
 
 //--------------- Restful -----------------//
 
-$route->url("tangkapPost",  "api",  "tangkapPost");
-$route->url("get_webhook",  "home", "getWebhook");
-$route->url("read_webhook", "home", "readWebhook");
-
 $route->url("verifikasi_registrasi", "api", "verifyRegistration");
 $route->url("verifikasi_key", "api", "verifyKey");
 $route->url("new_member",     "api", "newMember");
 $route->url("new_member_bc",  "api", "newMemberBC");
 $route->url("api/get/:key",   "api", "getMembers");
 $route->url("api/delete",	  "api", "deleteMember");
+$route->url("get_webhook",  "home", "getWebhook");
+$route->url("read_webhook", "home", "readWebhook");
