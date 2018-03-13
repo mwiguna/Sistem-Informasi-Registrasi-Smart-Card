@@ -7,7 +7,7 @@ $route = new Route();
 $route->url("/",      "home");
 $route->url("login",  "home", "login");
 $route->url("logout", "home", "logout");
-$route->url("realtime/:nim/:registrasi", "home", "realtime");
+$route->url("realtime/:nim/:registrasi/:webhook?", "home", "realtime");
 $route->url("error/:type", "home", "error");
 
 $route->url("home", "admin", "home");
@@ -34,10 +34,12 @@ $route->url("proses_tambah_registrasi", "organization", "processAddRegistration"
 //--------------- Restful -----------------//
 
 $route->url("verifikasi_registrasi", "api", "verifyRegistration");
-$route->url("verifikasi_key", "api", "verifyKey");
-$route->url("new_member",     "api", "newMember");
-$route->url("new_member_bc",  "api", "newMemberBC");
-$route->url("api/get/:key",   "api", "getMembers");
-$route->url("api/delete",	  "api", "deleteMember");
+$route->url("verifikasi_key",   "api", "verifyKey");
+$route->url("new_member",       "api", "newMember");
+$route->url("new_member_bc",    "api", "newMemberBC");
+$route->url("api/get/:key",     "api", "getMembers");
+$route->url("api/delete",	    "api", "deleteMember");
+$route->url("getStudent/:id/:nim",	"api", "getStudentAPI");
+$route->url("getMembers/:id/:nim",	"api", "getMembersAPI");
 $route->url("get_webhook",  "home", "getWebhook");
 $route->url("read_webhook", "home", "readWebhook");

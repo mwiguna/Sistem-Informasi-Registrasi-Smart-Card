@@ -77,7 +77,7 @@ class organizationController extends Controller {
       if(empty($member)) $this->redirect('lihat_registrasi/'.$id_registration);
     }
 
-    $data_member = $this->model('Siakad')->select()->where('nim', $nim)->execute();
+    $data_member = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".Security::encrypt($nim)));
     return $this->view('organization/member_detail', ['member' => $data_member]);
   }
 
@@ -167,7 +167,16 @@ class organizationController extends Controller {
       }
       
       $nim_members  = join(', ', $nim_members);
-      return $this->model('Siakad')->raw("SELECT * FROM mahasiswa_siakad WHERE nim IN ({$nim_members})");
+
+      $members = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getMembers/".Security::encrypt($nim_members)));
+
+      if(is_array($members)){
+        return $members;
+      } else {
+        $new_members[0] = $members;
+        return $new_members;
+      }
+      
     }
   }
 

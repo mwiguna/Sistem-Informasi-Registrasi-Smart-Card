@@ -15,7 +15,8 @@ class adminController extends Controller {
     $id = Security::decrypt($id);
 
     $organization = $this->model('Organization')->select()->where('id', $id)->execute();
-    $user = $this->model('Siakad')->select()->where('nim', $organization->nim)->execute();
+    $user = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".Security::encrypt($organization->nim)));
+    
   	return $this->view('admin/organization_detail', ['organization' => $organization, 'user' => $user]);
   }
 

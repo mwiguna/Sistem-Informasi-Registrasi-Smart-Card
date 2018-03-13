@@ -17,12 +17,7 @@ class apiController extends Controller {
                            ->where('id', Security::decrypt($_POST['id_registration']))
                            ->execute();
 
-      if($registration->privacy == 1) $data = ['*'];
-      else $data = ['nim', 'nama', 'prodi', 'fakultas'];
-      $member = $this->model('Siakad')->select($data)->where('nim', Security::decrypt($_POST['nim']))->execute();
-
-      if($registration->url != "") $this->sendingWebHook(Security::decrypt($registration->url), $member);
-      
+      $member = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".$_POST['nim']));
       $member = json_encode($member);
       echo $member;
     } else echo 404;
@@ -37,7 +32,7 @@ class apiController extends Controller {
     curl_setopt($ch, CURLOPT_POSTFIELDS, $postString);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
    
-    var_dump(curl_exec($ch));
+    curl_exec($ch);
     curl_close($ch);
   }
 
@@ -91,6 +86,9 @@ class apiController extends Controller {
                            ->where('id', $id_registration)->execute();
 
       if(!empty($registration)){
+        $member = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".$_POST['nim']));
+        if($registration->url != "") $this->sendingWebHook(Security::decrypt($registration->url), $member);
+
         if(empty($check_member)){
           $insert = $this->model('Member')->insert([
                 "nim" => $nim,
@@ -116,8 +114,15 @@ class apiController extends Controller {
       
       $nim_members  = join(', ', $nim_members);
 
-      $members = $this->model('Siakad')->raw("SELECT * FROM mahasiswa_siakad WHERE nim IN ({$nim_members})"); 
-      echo json_encode($members);
+      $members = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getMembers/".Security::encrypt($nim_members)));
+
+      if(is_array($members)){
+        echo json_encode($members);
+      } else {
+        $new_members[0] = $members;
+        echo json_encode($new_members);
+      }
+
     } else echo json_encode(array());
   }
 
@@ -134,6 +139,17 @@ class apiController extends Controller {
   
   /* ------------------------ */
 
+  public function getStudentAPI($id, $nim){
+    $registration = $this->Model('Registration')->select()->where('id', Security::decrypt($id))->execute();
+    echo file_get_contents($GLOBALS['siakad_url']."api/getStudent/".Security::encrypt($nim)."/".$registration->privacy);
+  }
+
+  public function getMembersAPI($id, $nim){
+    $registration = $this->Model('Registration')->select()->where('id', Security::decrypt($id))->execute();
+    
+    echo $GLOBALS['siakad_url']."api/getStudent/".Security::encrypt($nim)."/".$registration->privacy;
+    echo file_get_contents($GLOBALS['siakad_url']."api/getMembers/".Security::encrypt($nim)."/".$registration->privacy);
+  }
 
   public function response($status){
     echo json_encode(array("msg" => $status));

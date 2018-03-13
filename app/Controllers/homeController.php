@@ -35,8 +35,8 @@ class homeController extends Controller {
     $this->redirect('');
   }
 
-  public function realtime($nim, $registrasi){
-    echo $this->view('page/realtime', ['nim' => $nim, 'registrasi' => $registrasi]);
+  public function realtime($nim, $registrasi, $webhook = 0){
+    echo $this->view('page/realtime', ['nim' => $nim, 'registrasi' => $registrasi, 'webhook' => $webhook]);
   }
   
   public function getWebhook(){

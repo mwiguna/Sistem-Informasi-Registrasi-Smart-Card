@@ -77,6 +77,7 @@ class Database {
 
     if($value != '*') $value = implode(", ", $value);
     $this->query = "SELECT $value FROM $table";
+    $this->rows  = true;
     return $this->execute();
   }
 
