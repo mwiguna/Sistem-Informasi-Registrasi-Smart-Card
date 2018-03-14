@@ -17,7 +17,7 @@ class apiController extends Controller {
                            ->where('id', Security::decrypt($_POST['id_registration']))
                            ->execute();
 
-      $member = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".$_POST['nim']));
+      $member = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".$_POST['nim']."/".$registration->privacy));
       $member = json_encode($member);
       echo $member;
     } else echo 404;
@@ -86,7 +86,7 @@ class apiController extends Controller {
                            ->where('id', $id_registration)->execute();
 
       if(!empty($registration)){
-        $member = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".$_POST['nim']));
+        $member = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".$_POST['nim']."/".$registration->privacy));
         if($registration->url != "") $this->sendingWebHook(Security::decrypt($registration->url), $member);
 
         if(empty($check_member)){
@@ -105,7 +105,8 @@ class apiController extends Controller {
 
   public function getMembers($key){
     $id_registration = Security::decrypt($key);
-    $members = $this->model('Member')->select(['nim'])->where('id_registration', $id_registration)->get();
+    $registration = $this->Model('Registration')->select()->where('id', $id_registration)->execute();
+    $members      = $this->model('Member')->select(['nim'])->where('id_registration', $id_registration)->get();
     
     if(!empty($members)){
       foreach ($members as $member) {
@@ -114,7 +115,7 @@ class apiController extends Controller {
       
       $nim_members  = join(', ', $nim_members);
 
-      $members = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getMembers/".Security::encrypt($nim_members)));
+      $members = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getMembers/".Security::encrypt($nim_members)."/".$registration->privacy));
 
       if(is_array($members)){
         echo json_encode($members);

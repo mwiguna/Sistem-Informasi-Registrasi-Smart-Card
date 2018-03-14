@@ -66,18 +66,19 @@ class organizationController extends Controller {
 
   public function memberDetail($nim){    
     $nim = Security::decrypt($nim);
-    
+    $id_registration = Security::decrypt($_SESSION['key']);
+
     if($this->user()->role == 1){
       $_SESSION['privacy'] = true;
       $member = $this->model('Member')->select()->where('nim', $nim)->execute();
     } else {
-      $id_registration = Security::decrypt($_SESSION['key']);
       $member = $this->model('Member')->select()->where('nim', $nim)
                                                 ->where('id_registration', $id_registration)->execute();
       if(empty($member)) $this->redirect('lihat_registrasi/'.$id_registration);
     }
 
-    $data_member = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".Security::encrypt($nim)));
+    $registration = $this->model('Registration')->select()->where('id', $id_registration)->execute();
+    $data_member  = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".Security::encrypt($nim)."/".$registration->privacy));
     return $this->view('organization/member_detail', ['member' => $data_member]);
   }
 
@@ -168,7 +169,9 @@ class organizationController extends Controller {
       
       $nim_members  = join(', ', $nim_members);
 
-      $members = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getMembers/".Security::encrypt($nim_members)));
+
+      $registration = $this->model('Registration')->select()->where('id', $id)->execute();
+      $members = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getMembers/".Security::encrypt($nim_members)."/".$registration->privacy));
 
       if(is_array($members)){
         return $members;

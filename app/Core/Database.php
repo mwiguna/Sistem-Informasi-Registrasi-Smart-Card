@@ -84,6 +84,7 @@ class Database {
   public function select($value, $table){
     $this->indexes = [];
     $this->values  = [];
+    $this->rows    = false;
 
     if($value != '*') $value = implode(", ", $value);
     $this->query = "SELECT $value FROM $table ";
