@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 07, 2018 at 11:41 AM
+-- Generation Time: Mar 14, 2018 at 10:08 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -23,31 +23,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mahasiswa_siakad`
---
-
-CREATE TABLE `mahasiswa_siakad` (
-  `nim` varchar(9) NOT NULL,
-  `nama` varchar(40) NOT NULL,
-  `prodi` varchar(40) NOT NULL,
-  `fakultas` varchar(40) NOT NULL,
-  `nohp` varchar(12) NOT NULL,
-  `email` varchar(40) NOT NULL,
-  `alamat` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `mahasiswa_siakad`
---
-
-INSERT INTO `mahasiswa_siakad` (`nim`, `nama`, `prodi`, `fakultas`, `nohp`, `email`, `alamat`) VALUES
-('F1E115001', 'Nofita Rahayu Ningsih', 'Sistem Informasi', 'Sains dan Teknologi', '081234567890', 'nofita@gmail.com', 'Kemajuan No.74'),
-('F1E115017', 'Norman Syarif', 'Sistem Informasi', 'Sains dan Teknologi', '081234567890', 'normansyf@gmail.com', 'Simp. Rimbo No.74'),
-('F1E115023', 'M. Wiguna Saputra', 'Sistem Informasi', 'Sains dan Teknologi', '081234567890', 'mwiguna@gmail.com', 'Sipin No.74');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `members`
 --
 
@@ -62,7 +37,8 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`id`, `nim`, `id_registration`) VALUES
-(56, 'F1E115017', 21);
+(67, 'F1E115001', 22),
+(70, 'F1E115001', 23);
 
 -- --------------------------------------------------------
 
@@ -90,7 +66,9 @@ CREATE TABLE `organizations` (
 INSERT INTO `organizations` (`id`, `username`, `password`, `role`, `name`, `nim`, `phone`, `email`, `date`, `verify`) VALUES
 (1, 'admin', '$2y$10$mW/zUYfMX8g2lcPUblAiquPGPHwgOe9NEbHVH8a0KbxbPys4WqcmC', 1, '', '', '', '', '2018-03-07 09:15:47', 1),
 (9, 'perpus', '$2y$10$sGZYiR/a02KONW7OTpyEGOSYyEZJhLfB4t3aoK5qXcJPxWmBYVp12', 0, 'Perpustakaan', 'F1E115017', '081234567890', 'perpus@univ.ac.id', '2018-03-07 09:38:40', 1),
-(11, 'pmi', '$2y$10$tQvnVM050aPZjTPOCbErQeS06mkuh8kAeqk/XV7wy3BcbFDjNyB7C', 0, 'PMI', 'F1E115001', '085366668080', 'pmi@univ.ac.id', '2018-03-07 10:10:47', 0);
+(11, 'pmi', '$2y$10$tQvnVM050aPZjTPOCbErQeS06mkuh8kAeqk/XV7wy3BcbFDjNyB7C', 0, 'PMI', 'F1E115001', '085366668080', 'pmi@univ.ac.id', '2018-03-07 10:10:47', 0),
+(12, 'proyektor', '$2y$10$lXzoGjBJl9Mhsu9pG97tEuUIf/yenHYAxQqTt20s97pglJv/Q2TQS', 0, 'Proyektor FST', 'F1E115017', '081234567890', 'proyektor@univ.ac.id', '2018-03-08 08:52:56', 1),
+(13, 'alfa', '$2y$10$W5Yvw48rvjpO2mzqdxBCWONgGs/P8SwLqFGopUY/QkEmbZ3YvBWhK', 0, 'Alfamart Genk', 'F1E115017', '081234567890', 'alfa@gmail.com', '2018-03-14 07:41:07', 1);
 
 -- --------------------------------------------------------
 
@@ -118,17 +96,13 @@ INSERT INTO `registrations` (`id`, `id_organization`, `title`, `description`, `d
 (16, 7, 'Anggota Elit ', 'Elit Global', '2018-02-22 09:48:14', 0, 0, '3AT2lx3vKPUa1ZEzWioQxlk2ahmGKesFou_FVvSUOcxxDO-FWFMLaHqAmOxn3SRxC9Dy0FTLBko-BQmFlENC2Q'),
 (18, 2, 'Donor Darah', 'Daftar Relawan Donor Darah', '2018-02-22 09:57:06', 1, 1, NULL),
 (19, 8, 'Salam Pramuka', 'Dalam mahasiswa yang sudah nonton salam pramuka', '2018-02-28 06:59:21', 1, 1, NULL),
-(21, 9, 'Anggota 2018', 'Pendaftaran Anggota Perpustakaan 2018', '2018-03-07 10:20:27', 1, 1, '');
+(21, 9, 'Anggota 2018', 'Pendaftaran Anggota Perpustakaan 2018', '2018-03-07 10:20:27', 1, 1, ''),
+(22, 12, 'Peminjaman 2018', 'Daftar Peminjam Proyektor FST 2018', '2018-03-08 08:54:11', 0, 0, '3AT2lx3vKPUa1ZEzWioQxlk2ahmGKesFou_FVvSUOcwCTrwtxWKW971G3ZG3k-C9L2TkMPH_YNulW_D3K_z5Pg'),
+(23, 13, 'Anggota Elit', 'Daftar anggota elit pasukan khusus setia (KETUA ELIT)', '2018-03-14 07:50:08', 0, 0, NULL);
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `mahasiswa_siakad`
---
-ALTER TABLE `mahasiswa_siakad`
-  ADD PRIMARY KEY (`nim`);
 
 --
 -- Indexes for table `members`
@@ -159,17 +133,17 @@ ALTER TABLE `registrations`
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 --
 -- AUTO_INCREMENT for table `organizations`
 --
 ALTER TABLE `organizations`
-  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `registrations`
 --
 ALTER TABLE `registrations`
-  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
