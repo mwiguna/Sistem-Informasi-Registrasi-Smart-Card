@@ -21,7 +21,18 @@
 			<td><?= $member->fakultas ?></td>
 		</tr>
 
-		<?php if($_SESSION['privacy']): ?>
+		<?php
+			if(isset($data->additional)):
+			
+			$datas = (array) json_decode($data->additional);
+			foreach ($datas as $key => $value):
+		?>
+			<tr>
+				<td><?= ucfirst($key) ?></td>
+				<td><?= $value ?></td>
+			</tr>
+
+		<?php endforeach; endif; if($_SESSION['privacy']): ?>
 
 		<tr>
 			<td>Alamat</td>

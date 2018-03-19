@@ -35,10 +35,9 @@ class organizationController extends Controller {
 
 
   public function showOrganization($id){
-    $this->middleware();
-    if(!Security::valid($id)) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id));
-    
+    $this->middleware($id);
     $id = Security::decrypt($id);
+
     if(empty($id) && $id != $this->user()->id && $this->user()->role != 1) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id));
     
     $organization  = $this->model('Organization')->select()->where('id', $id)->execute();
@@ -49,10 +48,9 @@ class organizationController extends Controller {
 
 
   public function showRegistration($id){
-    $this->middleware();
-    if(!Security::valid($id)) $this->redirect('lihat_registrasi/'.$_SESSION['key']);
-
+    $this->middleware($id);
     $id = Security::decrypt($id);
+
     $registration = $this->model('Registration')->select()->where('id', $id)->execute();
     if($registration->id_organization != $this->user()->id && $this->user()->role != 1) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id));
     
@@ -64,25 +62,24 @@ class organizationController extends Controller {
   }
 
 
-  public function memberDetail($nim){    
+  public function memberDetail($nim){
+    $this->middleware($nim);   
     $nim = Security::decrypt($nim);
     $privacy = 1;
 
-    if($this->user()->role == 1){
-      $_SESSION['privacy'] = true;
-      $member = $this->model('Member')->select()->where('nim', $nim)->execute();
-    } else {
-      $id_registration = Security::decrypt($_SESSION['key']);
-      $member = $this->model('Member')->select()->where('nim', $nim)
-                                                ->where('id_registration', $id_registration)->execute();
+    $id_registration = Security::decrypt($_SESSION['key']);
+    $member = $this->model('Member')->select()->where('nim', $nim)
+                                              ->where('id_registration', $id_registration)->execute();
 
+    if($this->user()->role == 1) $_SESSION['privacy'] = true;
+    else {
       if(empty($member)) $this->redirect('lihat_registrasi/'.$id_registration);
       $registration = $this->model('Registration')->select()->where('id', $id_registration)->execute();
       $privacy = $registration->privacy;
     }
 
     $data_member  = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".Security::encrypt($nim)."/".$privacy));
-    return $this->view('organization/member_detail', ['member' => $data_member]);
+    return $this->view('organization/member_detail', ['member' => $data_member, 'data' => $member]);
   }
 
 
@@ -113,7 +110,7 @@ class organizationController extends Controller {
 
 
   public function deleteRegistration($id){
-    $this->middleware();
+    $this->middleware($id);
     $registration = $this->model('Registration')->delete()->where('id', Security::decrypt($id))->execute();
 
     if($registration) $this->redirect("lihat_organisasi/".Security::encrypt($this->user()->id));
@@ -121,11 +118,79 @@ class organizationController extends Controller {
   }
 
   public function deleteMember($nim){
-    $this->middleware();
-    $member = $this->model('Member')->delete()->where('nim', Security::decrypt($nim))->execute();
+    $this->middleware($nim);
+    $member = $this->model('Member')->delete()->where('nim', Security::decrypt($nim))
+                                              ->where('id_registration', Security::decrypt($_SESSION['key']))
+                                              ->execute();
 
     if($member) $this->redirect("lihat_registrasi/".$_SESSION['key']);
     else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
+  }
+
+
+
+  // ----------- Additional Data
+
+
+  public function additionalData($id){
+    $this->middleware($id);
+    $_SESSION['key'] = $id; 
+    return $this->view("organization/additional_data", ['additionals' => $this->getAdditionals()]);
+  }
+
+  public function additionalDataMember($id){
+    $this->middleware($id);
+    $_SESSION['key'] = $id;
+
+    return $this->view("organization/additional_data_member");
+  }
+
+  public function addAdditional(){
+    $id = Security::decrypt($_SESSION['key']);
+    $registration = $this->model('Registration')->select()->where('id', $id)->execute();
+    $update       = $this->model('Registration')
+                         ->update(["additional" => $registration->additional . $_POST['data'] . ";"])
+                         ->where('id', $id)->execute();
+
+    if($update) $this->redirect("data_tambahan/".$_SESSION['key']);
+    else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
+  }
+
+
+  public function addAdditionalMember(){
+    $nim  =  Security::decrypt($_POST['nim']);
+    unset($_POST['nim']);
+    
+    $update = $this->model('Member')
+                   ->update(["additional" => json_encode($_POST)])
+                   ->where('nim', $nim)
+                   ->where('id_registration', Security::decrypt($_SESSION['key']))->execute();
+
+    if($update) $this->redirect("halaman_pendaftar/".$_SESSION['key']);
+    else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
+  }
+
+
+  public function deleteAdditional($data){
+    $id = Security::decrypt($_SESSION['key']);
+    $registration = $this->model('Registration')->select()->where('id', $id)->execute();
+    $update       = $this->model('Registration')
+                         ->update(["additional" => str_replace(str_replace("_", " ", $data).";", "", $registration->additional)])
+                         ->where('id', $id)->execute();
+
+    if($update) $this->redirect("data_tambahan/".$_SESSION['key']);
+    else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
+  }
+
+
+  public function getAdditionals(){
+    $registration = $this->model('Registration')->select()
+                                                ->where('id', Security::decrypt($_SESSION['key']))
+                                                ->execute();
+
+    $additionals = explode(";", $registration->additional);
+    $formatData  = array_pop($additionals);
+    return $additionals;
   }
 
 
@@ -136,9 +201,17 @@ class organizationController extends Controller {
     $registration = $this->model('Registration')->select()
                          ->where('id', Security::decrypt($_SESSION['key']))->execute();
 
-    $members = $this->getDataMembers($registration->id);
+    $additionals = explode(";", $registration->additional);
+    $formatData  = array_pop($additionals);
 
-    $this->view('organization/print', ['members' => $members, 'registration' => $registration]);
+    $members = $this->getDataMembers($registration->id);
+    $datas = $this->model('Member')->select()->where('id_registration', $registration->id)->get();
+    
+    foreach ($datas as $data) {
+      $additionalData[$data->nim] = (array) json_decode($data->additional); 
+    }
+
+    $this->view('organization/print', ['members' => $members, 'data' => $additionalData, 'additionals' => $additionals, 'registration' => $registration]);
   }
 
   public function apiDocumentation(){
@@ -186,8 +259,11 @@ class organizationController extends Controller {
     }
   }
 
-  public function middleware(){
+  public function middleware($key = null){
     if(!isset($this->userId)) $this->redirect('');
+    if(!empty($key)){
+      if(!Security::valid($key)) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id)); 
+    }
   }
 
 }

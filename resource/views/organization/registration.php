@@ -40,8 +40,9 @@
 
 		<div class="col-12 mb-4">
 			<div class="hiddenTable"></div>
-			<button class="col-2 btn btn-primary download_csv">Download CSV</button>
-			<a href="<?= url('dokumentasi_api') ?>" class="col-2 btn btn-success">Dokumentasi API</a>
+			<button class="col-2 btn btn-success download_csv">Download CSV</button>
+			<a href="<?= url('data_tambahan/'.$_SESSION['key']) ?>" class="col-2 btn btn-success">Data Tambahan</a>
+			<a href="<?= url('dokumentasi_api') ?>" class="col-2 btn btn-primary">Dokumentasi API</a>
 		</div>
 
 		<div class="row justify-content-md-center">

@@ -37,6 +37,12 @@ class apiController extends Controller {
   }
 
 
+
+  public function decrypt(){
+    echo json_encode(array("nim" => Security::decrypt($_POST['nim'])));
+  }
+
+
   /* ------------- Process ------------- */
 
 

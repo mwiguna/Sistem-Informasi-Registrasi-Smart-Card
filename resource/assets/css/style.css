@@ -5,3 +5,7 @@
 	position: absolute;
 	visibility: hidden;
 }
+
+.hide {
+	display: none;
+}

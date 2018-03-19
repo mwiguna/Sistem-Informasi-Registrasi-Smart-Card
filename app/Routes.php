@@ -29,7 +29,12 @@ $route->url("tambah_url", 			"organization", "addURL");
 $route->url("hapus_registrasi/:id", "organization", "deleteRegistration");
 $route->url("hapus_anggota/:nim",   "organization", "deleteMember");
 $route->url("download_csv", 		"organization", "downloadCSV");
-$route->url("proses_tambah_registrasi", "organization", "processAddRegistration");
+$route->url("data_tambahan/:id",	"organization", "additionalData");
+$route->url("halaman_pendaftar/:id",	   "organization", "additionalDataMember");
+$route->url("tambah_data_tambahan",        "organization", "addAdditional");
+$route->url("tambah_data_tambahan_member", "organization", "addAdditionalMember");
+$route->url("hapus_tambahan/:data",		   "organization", "deleteAdditional");
+$route->url("proses_tambah_registrasi",    "organization", "processAddRegistration");
 
 //--------------- Restful -----------------//
 
@@ -41,5 +46,6 @@ $route->url("api/get/:key",     "api", "getMembers");
 $route->url("api/delete",	    "api", "deleteMember");
 $route->url("getStudent/:id/:nim",	"api", "getStudentAPI");
 $route->url("getMembers/:id/:nim",	"api", "getMembersAPI");
+$route->url("decryptNIM",			"api", "decrypt");
 $route->url("get_webhook",  "home", "getWebhook");
 $route->url("read_webhook", "home", "readWebhook");
