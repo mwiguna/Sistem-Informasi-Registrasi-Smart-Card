@@ -205,7 +205,7 @@ class organizationController extends Controller {
                                                 ->execute();
 
     $additionals = explode(";", $registration->additional);
-    $formatData  = array_pop($additionals);
+    array_pop($additionals);
     return $additionals;
   }
 
