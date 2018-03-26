@@ -11,10 +11,12 @@ $route->url("realtime/:nim/:registrasi/:webhook?", "home", "realtime");
 $route->url("error/:type", "home", "error");
 
 $route->url("home", "admin", "home");
-$route->url("persetujuan_data",         "admin", "dataApproval");
+$route->url("persetujuan_event",       	"admin", "eventApproval");
+$route->url("persetujuan_organisasi",   "admin", "organizationApproval");
 $route->url("detail_organisasi/:id",    "admin", "organizationDetail");
 $route->url("detail_persetujuan/:id",   "admin", "approvalDetail");
-$route->url("approve_data/:id", 		"admin", "approveData");
+$route->url("approve_event/:id", 		"admin", "approveEvent");
+$route->url("approve_organization/:id", "admin", "approveOrganization");
 $route->url("hapus_organisasi/:id", 	"admin", "deleteOrganization");
 
 $route->url("daftar",  		"organization", "registration");

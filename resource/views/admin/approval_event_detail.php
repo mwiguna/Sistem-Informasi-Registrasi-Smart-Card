@@ -16,5 +16,5 @@
 		</div>
 	</div>
 
-	<a class="col-2 btn btn-success" href="<?= url('approve_data/'.$registration->id) ?>" onclick="return confirm('Yakin?')">Setujui</a>
+	<a class="col-2 btn btn-success" href="<?= url('approve_event/'.$registration->id) ?>" onclick="return confirm('Yakin?')">Setujui</a>
 </div>

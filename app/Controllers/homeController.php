@@ -12,7 +12,8 @@ class homeController extends Controller {
     if(isset($this->userId)) $this->redirect('home'); 
 
     if ($type == 'login') return $this->view('page/login', ['msg' => 'Username atau password tidak cocok']);
-    else if($type == 'verify') return $this->view('page/login', ['msg' => 'Akun belum aktif, silahkan scan kartu identitas sesuai NIP / NIM penanggung jawab.']);
+    else if($type == 'verify') return $this->view('page/login', ['msg' => 'Silahkan scan kartu identitas sesuai NIP / NIM penanggung jawab sebelum menggunakan akun']);
+    else if($type == 'berkas') return $this->view('page/login', ['msg' => 'Harap menunggu berkas disetujui oleh admin sebelum menggunakan akun.']);
   }
 
   public function login(){
@@ -20,12 +21,14 @@ class homeController extends Controller {
 
   	if(!empty($organization)){
   		if($this->verify($_POST['password'], $organization->password)){
-        if($organization->verify == 1){
+        if($organization->verify == 2){
           $_SESSION['id'] = $organization->id;
 
           if($organization->role == 1) $this->redirect('home');
           else $this->redirect('lihat_organisasi/'.Security::encrypt($organization->id));
-        } else $this->redirect('error/verify');
+        } 
+        else if($organization->verify == 1) $this->redirect('error/berkas');
+        else $this->redirect('error/verify');
       } else $this->redirect('error/login');
   	} else $this->redirect('error/login');
   }

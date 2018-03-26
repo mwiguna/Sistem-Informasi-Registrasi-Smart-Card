@@ -1,7 +1,8 @@
 
 <div class="container">
 	<div class="col-lg-12">
-		<a href="<?= url('persetujuan_data') ?>" class="btn btn-success col-lg-2">Persetujuan Data</a>
+		<a href="<?= url('persetujuan_organisasi') ?>" class="btn btn-success col-lg-3">Persetujuan Organisasi</a>
+		<a href="<?= url('persetujuan_event') ?>" class="btn btn-success col-lg-2">Persetujuan Event</a>
 		<a href="<?= url('logout') ?>" class="btn btn-danger  col-lg-2">Logout</a>
 	</div>
 

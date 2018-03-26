@@ -4,7 +4,7 @@ class adminController extends Controller {
 
   public function home(){
     $this->middleware();
-    $organizations = $this->model('Organization')->select()->where('role', 0)->get();
+    $organizations = $this->model('Organization')->select()->where('role', 0)->where('verify', 2)->get();
     return $this->view('admin/home', ['organizations' => $organizations]);
   }
 
@@ -21,10 +21,17 @@ class adminController extends Controller {
   }
 
 
-  public function dataApproval(){
+  public function eventApproval(){
     $this->middleware();
     $registrations = $this->model('Registration')->select()->where('privacy', 1)->where('verify', 0)->get(); 
-    return $this->view('admin/data_approval', ['registrations' => $registrations]);
+    return $this->view('admin/event_approval', ['registrations' => $registrations]);
+  }
+
+
+  public function organizationApproval(){
+    $this->middleware();
+    $organizations = $this->model('Organization')->select()->where('verify', '!=', 2)->where('role', 0)->get();
+    return $this->view('admin/organization_approval', ['organizations' => $organizations]);
   }
 
 
@@ -35,18 +42,30 @@ class adminController extends Controller {
     
     $registration = $this->model('Registration')->select()->where('id', $id)->execute();
     $organization = $this->model('Organization')->select()->where('id', $registration->id_organization)->execute(); 
-    return $this->view('admin/approval_detail', ['registration' => $registration, 'organization' => $organization]);
+    return $this->view('admin/approval_event_detail', ['registration' => $registration, 'organization' => $organization]);
   }
 
 
-  public function approveData($id){
+  public function approveEvent($id){
     $this->middleware();
 
     $registration = $this->model('Registration')->update([
             "verify" => 1,
           ])->where('id', $id)->execute();
 
-    if($registration) $this->redirect("persetujuan_data");
+    if($registration) $this->redirect("persetujuan_event");
+    else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
+  }
+
+
+  public function approveOrganization($id){
+    $this->middleware();
+
+    $organization = $this->model('Organization')->update([
+            "verify" => 2,
+          ])->where('id', $id)->execute();
+
+    if($organization) $this->redirect("persetujuan_organisasi");
     else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
   }
 

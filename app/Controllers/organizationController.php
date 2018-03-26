@@ -23,8 +23,22 @@ class organizationController extends Controller {
             "name"  => $_POST['name'],
             "nim"   => $_POST['nim'],
             "phone" => $_POST['phone'],
-            "email" => $_POST['email'],
-          ])->execute();
+            "email" => $_POST['email']
+          ])->lastId()->execute();
+
+    $dir = __DIR__."/../../resource/assets/file/";
+    if(is_uploaded_file($_FILES['berkas']['tmp_name'])) {
+      if($_FILES['berkas']['type'] != "application/pdf"){
+        $organization = $this->model('Organization')->delete()->where('id', $organization)->execute();
+        die('Berkas yang di upload harus berformat pdf');
+      } else if($_FILES['berkas']['size'] >= 2097152){
+        $organization = $this->model('Organization')->delete()->where('id', $organization)->execute();
+        die('Ukuran berkas yang di upload harus kurang dari 2 MB');
+      } else {
+        $result = move_uploaded_file($_FILES['berkas']['tmp_name'], $dir.Security::encrypt($organization).".pdf");
+        if ($result != 1) die('Terjadi Kesalahan dalam mengupload, Mohon ulangi beberapa saat lagi');
+      }
+    }
 
     if($organization) $this->view('organization/success_registration');
     else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
@@ -67,12 +81,14 @@ class organizationController extends Controller {
     $nim = Security::decrypt($nim);
     $privacy = 1;
 
-    $id_registration = Security::decrypt($_SESSION['key']);
-    $member = $this->model('Member')->select()->where('nim', $nim)
+    if($this->user()->role == 1){
+      $_SESSION['privacy'] = true;
+      $member = $this->model('Member')->select()->where('nim', $nim)->execute();
+    } else {
+      $id_registration = Security::decrypt($_SESSION['key']);
+      $member = $this->model('Member')->select()->where('nim', $nim)
                                               ->where('id_registration', $id_registration)->execute();
 
-    if($this->user()->role == 1) $_SESSION['privacy'] = true;
-    else {
       if(empty($member)) $this->redirect('lihat_registrasi/'.$id_registration);
       $registration = $this->model('Registration')->select()->where('id', $id_registration)->execute();
       $privacy = $registration->privacy;
