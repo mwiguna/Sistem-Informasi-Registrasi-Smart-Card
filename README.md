@@ -1,4 +1,4 @@
-# Sistem-Informasi-Registrasi-Smart-Card
+woi fuck# Sistem-Informasi-Registrasi-Smart-Card
 Sistem Informasi Registrasi Organisasi pada suatu universitas dengan menggunakan KTM sebagai Smart Card (NFC Card)
 
 ## Database Configuration
