@@ -1,4 +1,7 @@
 	
-	<div class="col-12 text-center mt-5 footer-sireg">Copyright 2018 SIREG Universitas Norman</div>
+		<footer>
+			<p>SIREG | UNIVERSITAS X</p>
+			<p>&copy; 2018</p>
+		</footer>
 	</body>
 </html>
