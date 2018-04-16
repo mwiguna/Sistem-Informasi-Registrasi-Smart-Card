@@ -5,9 +5,14 @@
 		<form class="col-12" method="POST" action="<?= url('tambah_data_tambahan_member') ?>">
 			<div class="member"><i>(Tap KTM di NFC Reader untuk mendaftar)</i></div>
 
-			<input type="hidden" name="nim" value="">
-			<input type="text" class="form-control col-5" name="alasan"  placeholder="Alasan">
-			<input type="text" class="form-control col-5" name="jabatan" placeholder="Jabatan">
+			<input type="hidden" name="nim">
+
+			<?php foreach ($additionals as $additional): ?>
+			
+				<input type="text" class="form-control" name="<?= Security::encrypt($additional->id) ?>"  placeholder="<?= $additional->description ?>">
+			
+			<?php endforeach; ?>
+			
 			<input type="submit" value="Kirim" class="col-1 btn btn-primary submit" disabled>
 		</form>
 	</div>

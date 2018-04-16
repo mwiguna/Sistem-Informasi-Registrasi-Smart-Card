@@ -70,7 +70,7 @@ class adminController extends Controller {
   }
 
 
-  public function deleteOrganization($id){
+  public function deleteOrganization($id, $verifyPage){
     $this->middleware();
     $organization = $this->model('Organization')->delete()->where('id', $id)->execute();
     if($organization) $this->redirect('home');

@@ -1,5 +1,5 @@
 
-<table id="csvTable" border="1">
+<table id="csvTableDoNotRemove" border="1">
 	<?php $col = ($_SESSION['privacy']) ? 8 : 5 ?>
 
 	<tr><td colspan="<?= $col + count($additionals) ?>"><?= $registration->title ?></td></tr>
@@ -17,9 +17,9 @@
 		<td>No. HP</td>
 		<td>E-mail</td>
 
-		<?php endif; foreach($additionals as $additional): ?>
+		<?php endif; foreach($additionalTypes as $type): ?>
 
-		<td><?= ucfirst($additional) ?></td>
+		<td><?= $type->description ?></td>
 
 		<?php endforeach; ?>
 	</tr>
@@ -39,9 +39,9 @@
 			<td><?= $member->nohp ?></td>
 			<td><?= $member->email ?></td>
 
-			<?php endif; foreach ($data[$member->nim] as $value): ?>
+			<?php endif; foreach ($member->additionals as $data): ?>
 
-			<td><?= $value ?></td>
+			<td><?= $data->val ?></td>
 
 			<?php endforeach; ?>
 		</tr>

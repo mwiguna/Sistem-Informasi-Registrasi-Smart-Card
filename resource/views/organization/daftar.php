@@ -10,7 +10,7 @@
 						</a>
 					</div>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<?= url('login') ?>">Login</a></li>
+						<li><a href="<?= url('') ?>">Login</a></li>
 						<li class="atau">atau</li>
 						<li><a href="<?= url('daftar') ?>">Daftar</a></li>
 					</ul>
@@ -50,7 +50,7 @@
 						<div class="daftar-berkas">Upload berkas organisasi</div>
 						<input type="file" name="berkas" accept="application/pdf" required>
 						<button class="main-button">Daftar</button>
-						<p class="already">Sudah memiliki akun? <a href="<?= url('login') ?>">Login</a></p>
+						<p class="already">Sudah memiliki akun? <a href="<?= url('') ?>">Login</a></p>
 					</form>
 				</div>
 			</div>

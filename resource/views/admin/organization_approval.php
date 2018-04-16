@@ -32,7 +32,7 @@
 
 						<div class="main-box add-reg">
 							<p class="main-message">Belum ada registrasi organisasi yang membutuhkan persetujuan.</p>
-							<a href="<?= url('home') ?>" class="button-msg"><button class="button button-blue ">Daftar Organisasi</button></a>
+							<a href="<?= url('home') ?>" class="button-msg"><button class="button button-blue button-redirect">Daftar Organisasi</button></a>
 						</div>
 
 					<?php else: ?>
@@ -70,7 +70,7 @@
 									</td>
 
 									<td>
-										<a href="<?= url(' hapus_organisasi/'.$organization->id) ?>" onclick="return confirm('Yakin ingin menghapus?')"><button class="button-small button-red">Hapus</button></a>
+										<a href="<?= url(' hapus_organisasi/'.$organization->id.'/1') ?>" onclick="return confirm('Yakin ingin menghapus?')"><button class="button-small button-red">Hapus</button></a>
 									</td>
 								</tr>
 								

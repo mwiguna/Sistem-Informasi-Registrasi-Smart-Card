@@ -81,21 +81,33 @@ class organizationController extends Controller {
     $nim = Security::decrypt($nim);
     $privacy = 1;
 
+    $dataAdditional = [];
+    if(isset($_SESSION['key'])){
+      $id_registration = Security::decrypt($_SESSION['key']);
+      $registration = $this->model('Registration')->select()->where('id', $id_registration)->execute();
+
+      $additionals  = $this->model()
+                           ->raw("SELECT * FROM additional_member AS member JOIN additional_registration AS registration WHERE member.id_additional = registration.id AND member.nim = '$nim' AND registration.id_registration = '$registration->id'");
+
+      foreach($additionals as $additional){
+        if($additional->nim == $nim) $dataAdditional []= (object) array("desc" => $additional->description, "val" => $additional->value);
+      }
+    }
+
     if($this->user()->role == 1){
       $_SESSION['privacy'] = true;
       $member = $this->model('Member')->select()->where('nim', $nim)->execute();
     } else {
-      $id_registration = Security::decrypt($_SESSION['key']);
       $member = $this->model('Member')->select()->where('nim', $nim)
                                               ->where('id_registration', $id_registration)->execute();
 
       if(empty($member)) $this->redirect('lihat_registrasi/'.$id_registration);
-      $registration = $this->model('Registration')->select()->where('id', $id_registration)->execute();
-      $privacy = $registration->privacy;
+      $privacy      = $registration->privacy;
     }
 
     $data_member  = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".Security::encrypt($nim)."/".$privacy));
-    return $this->view('organization/member_detail', ['member' => $data_member, 'data' => $member]);
+
+    return $this->view('organization/member_detail', ['member' => $data_member, 'data' => $member, 'dataAdditional' => $dataAdditional]);
   }
 
 
@@ -157,55 +169,61 @@ class organizationController extends Controller {
   public function additionalDataMember($id){
     $this->middleware($id);
     $_SESSION['key'] = $id;
+    $id = Security::decrypt($id);
 
-    return $this->view("organization/additional_data_member");
+    $additionals = $this->model('AdditionalRegistration')->select()->where("id_registration", $id)->get();
+    return $this->view("organization/additional_data_member", ["additionals" => $additionals]);
   }
 
   public function addAdditional(){
-    $id = Security::decrypt($_SESSION['key']);
-    $registration = $this->model('Registration')->select()->where('id', $id)->execute();
-    $update       = $this->model('Registration')
-                         ->update(["additional" => $registration->additional . $_POST['data'] . ";"])
-                         ->where('id', $id)->execute();
+    $id     = Security::decrypt($_SESSION['key']);
+    $insert = $this->model('AdditionalRegistration')
+                   ->insert([
+                      "id_registration" => $id,
+                      "description"     => $_POST['data']
+                   ])->execute();
 
-    if($update) $this->redirect("data_tambahan/".$_SESSION['key']);
+    if($insert) $this->redirect("data_tambahan/".$_SESSION['key']);
     else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
   }
 
 
   public function addAdditionalMember(){
-    $nim  =  Security::decrypt($_POST['nim']);
+    $this->middleware($_POST['nim']);
+    $nim = Security::decrypt($_POST['nim']);
     unset($_POST['nim']);
     
-    $update = $this->model('Member')
-                   ->update(["additional" => json_encode($_POST)])
-                   ->where('nim', $nim)
-                   ->where('id_registration', Security::decrypt($_SESSION['key']))->execute();
+    foreach ($_POST as $data => $value) {
+      $insert = $this->model('AdditionalMember')
+                     ->insert([
+                        "id_additional" => Security::decrypt($data), 
+                        "nim"   => $nim,
+                        "value" => $value
+                      ])->execute();
+      if(!$insert) die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
+    }
 
-    if($update) $this->redirect("halaman_pendaftar/".$_SESSION['key']);
-    else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
+    $this->redirect("halaman_pendaftar/".$_SESSION['key']);
   }
 
 
   public function deleteAdditional($data){
-    $id = Security::decrypt($_SESSION['key']);
-    $registration = $this->model('Registration')->select()->where('id', $id)->execute();
-    $update       = $this->model('Registration')
-                         ->update(["additional" => str_replace(str_replace("_", " ", $data).";", "", $registration->additional)])
-                         ->where('id', $id)->execute();
+    $this->middleware($data);
+    $id            = Security::decrypt($_SESSION['key']);
+    $id_additional = Security::decrypt($data);
 
-    if($update) $this->redirect("data_tambahan/".$_SESSION['key']);
+    $additional    = $this->Model("AdditionalRegistration")->delete()->where("id", $id_additional)->execute();
+
+    if($additional) $this->redirect("data_tambahan/".$_SESSION['key']);
     else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
   }
 
 
   public function getAdditionals(){
-    $registration = $this->model('Registration')->select()
-                                                ->where('id', Security::decrypt($_SESSION['key']))
-                                                ->execute();
+    $additionals = $this->model('AdditionalRegistration')->select()
+                        ->where('id_registration', Security::decrypt($_SESSION['key']))
+                        ->get();
 
-    $additionals = explode(";", $registration->additional);
-    array_pop($additionals);
     return $additionals;
   }
 
@@ -214,20 +232,30 @@ class organizationController extends Controller {
 
 
   public function downloadCSV(){
+    error_reporting(0); 
     $registration = $this->model('Registration')->select()
                          ->where('id', Security::decrypt($_SESSION['key']))->execute();
-
-    $additionals = explode(";", $registration->additional);
-    $formatData  = array_pop($additionals);
 
     $members = $this->getDataMembers($registration->id);
     $datas = $this->model('Member')->select()->where('id_registration', $registration->id)->get();
     
-    foreach ($datas as $data) {
-      $additionalData[$data->nim] = (array) json_decode($data->additional); 
-    }
+    $additionals  = $this->model()
+                           ->raw("SELECT * FROM additional_member AS member JOIN additional_registration AS registration WHERE member.id_additional = registration.id AND registration.id_registration = '$registration->id'");
 
-    $this->view('organization/print', ['members' => $members, 'data' => $additionalData, 'additionals' => $additionals, 'registration' => $registration]);
+    $additionalTypes = $this->model('AdditionalRegistration')
+                            ->select(['description'])
+                            ->where('id_registration', $registration->id)->get();
+
+      $i = 0; foreach($members as $member){
+        $j = 0; foreach($additionals as $additional){
+          if($additional->nim == $member->nim){
+            $members[$i]->additionals[$j]->desc = $additional->description;
+            $members[$i]->additionals[$j]->val  = $additional->value;
+          } $j++;
+        } $i++;
+      }
+
+    $this->view('organization/print', ['members' => $members, 'additionalTypes' => $additionalTypes, 'registration' => $registration]);
   }
 
   public function apiDocumentation(){

@@ -1,6 +1,12 @@
+
 * {
 	margin: 0;
 	padding: 0;
+}
+
+#csvTableDoNotRemove {
+  position: absolute; 
+  left: -999em;
 }
 
 .home-body {
@@ -213,9 +219,14 @@ footer	{
 	background-color: #F1F1F1;
 }
 
+.button-redirect {
+	padding: 1% !important;
+}
+
 .button {
 	font-size: 1.1em;
-	padding: 5px 10px;
+	padding: 2% 4%;
+	font-weight: bold;
 	border-radius: 6px;
 	box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2);
 	border: none;
@@ -223,7 +234,8 @@ footer	{
 
 .button-small {
 	font-size: .9em;
-	padding: 4px 8px;
+	padding: 2% 4%;
+	font-weight: bold;
 	border-radius: 6px;
 	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
 	border: none;

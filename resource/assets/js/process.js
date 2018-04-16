@@ -4,7 +4,7 @@
 	 *
 	 */
 
-    var conn = new WebSocket('ws://192.168.12.1:8080');
+    var conn = new WebSocket('ws://192.168.43.126:8080');
 
 	/*
 	 * Validation
@@ -87,7 +87,8 @@
 
 	 $(document).on("click", ".download_csv", function(e){
 	 	$(".hiddenTable").load('../download_csv', function(){
-		 	$('#csvTable').each(function () {
+	 		$('footer').first().remove();
+		 	$('#csvTableDoNotRemove').each(function () {
 			    var $table = $(this);
 
 			    var csvdata = $table.table2CSV({

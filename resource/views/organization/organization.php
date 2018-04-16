@@ -1,6 +1,6 @@
 
 <div class="container">
-	<h3>Daftar Registrasi</h3>
+	<h3>Daftar Event</h3>
 	<h6><?= $organization->name ?></h6>
 
 	<?php if($organization->id == $auth->id): ?>

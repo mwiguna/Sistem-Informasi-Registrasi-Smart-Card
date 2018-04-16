@@ -56,8 +56,8 @@
 									<td><?= $organization->name ?></td>
 									<td>
 										<a href="<?= url('detail_organisasi/'.Security::encrypt($organization->id)) ?>"><button class="button-small button-green">Detail</button></a>
-										<a href="<?= url('lihat_organisasi/'.Security::encrypt($organization->id)) ?>"><button class="button-small button-blue">Registrasi</button></a>
-										<a href="<?= url(' hapus_organisasi/'.$organization->id) ?>" onclick="return confirm('Yakin ingin menghapus?')"><button class="button-small button-red">Hapus</button></a>
+										<a href="<?= url('lihat_organisasi/'.Security::encrypt($organization->id)) ?>"><button class="button-small button-blue">Daftar Event</button></a>
+										<a href="<?= url(' hapus_organisasi/'.$organization->id.'/0') ?>" onclick="return confirm('Yakin ingin menghapus?')"><button class="button-small button-red">Hapus</button></a>
 									</td>
 								</tr>
 

@@ -11,7 +11,7 @@
 						</a>
 					</div>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<?= url('login') ?>">Login</a></li>
+						<li><a href="<?= url('') ?>">Login</a></li>
 						<li class="atau">atau</li>
 						<li><a href="<?= url('daftar') ?>">Daftar</a></li>
 					</ul>

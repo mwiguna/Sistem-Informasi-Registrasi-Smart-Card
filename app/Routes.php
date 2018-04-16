@@ -17,7 +17,7 @@ $route->url("detail_organisasi/:id",    "admin", "organizationDetail");
 $route->url("detail_persetujuan/:id",   "admin", "approvalDetail");
 $route->url("approve_event/:id", 		"admin", "approveEvent");
 $route->url("approve_organization/:id", "admin", "approveOrganization");
-$route->url("hapus_organisasi/:id", 	"admin", "deleteOrganization");
+$route->url("hapus_organisasi/:id/:verifyPage",  "admin", "deleteOrganization");
 
 $route->url("daftar",  		"organization", "registration");
 $route->url("register", 	"organization", "register");

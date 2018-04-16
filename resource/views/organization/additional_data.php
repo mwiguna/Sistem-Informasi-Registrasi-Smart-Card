@@ -2,7 +2,7 @@
 <div class="container">
 	<h3>Masukkan Data tambahan yang diperlukan :</h3>
 	<form class="row" method="POST" action="<?= url('tambah_data_tambahan') ?>">
-		<input type="text" name="data" class="form-control col-3" placeholder="Data">
+		<input type="text" name="data" class="form-control col-3" placeholder="Data" required>
 		<input type="submit" value="Tambah" class="btn btn-primary col-1">
 	</form>
 
@@ -17,9 +17,9 @@
 			
 			<tr>
 				<td><?= $i ?></td>
-				<td><?= $additional ?></td>
+				<td><?= $additional->description ?></td>
 				<td>
-					<a href="<?= url('hapus_tambahan/'.str_replace(' ', '_', $additional)) ?>" class="btn btn-danger" onclick="return confirm('Yakin?')">Hapus</a>
+					<a href="<?= url('hapus_tambahan/'.Security::encrypt($additional->id)) ?>" class="btn btn-danger" onclick="return confirm('Yakin?')">Hapus</a>
 				</td>
 			</tr>
 

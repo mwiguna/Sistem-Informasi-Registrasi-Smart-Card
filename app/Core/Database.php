@@ -246,6 +246,7 @@ class Database {
         $this->values[]  = $value;
       }
     }
+    $this->rows = true;
     return $this->execute();
   }
 
