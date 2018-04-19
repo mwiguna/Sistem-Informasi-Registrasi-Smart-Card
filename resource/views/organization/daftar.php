@@ -49,7 +49,7 @@
 
 						<div class="daftar-berkas">Upload berkas organisasi</div>
 						<input type="file" name="berkas" accept="application/pdf" required>
-						<button class="main-button">Daftar</button>
+						<input type="submit" class="main-button" id="submit" value="Daftar">
 						<p class="already">Sudah memiliki akun? <a href="<?= url('') ?>">Login</a></p>
 					</form>
 				</div>

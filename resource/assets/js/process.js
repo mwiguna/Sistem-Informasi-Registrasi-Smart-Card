@@ -14,10 +14,10 @@
 	$(document).on("keyup", ".validate-password", function(e){
 		if($("input[name*='password']").val() != $("input[name*='validate']").val()){
 			$(".msg-password").text('Konfirmasi password tidak cocok');
-			$('input[type=submit]').prop('disabled', true);
+			$('#submit').prop('disabled', true);
 		} else {
 			$(".msg-password").text('');
-			$('input[type=submit]').prop('disabled', false);
+			$('#submit').prop('disabled', false);
 		}
 	});
 
@@ -29,10 +29,10 @@
 		  success: function (response) {
 		  	if(response == 1){
 		  		$(".msg-username").text('Username sudah pernah digunakan');
-				$('input[type=submit]').prop('disabled', true);
+				$('#submit').prop('disabled', true);
 			} else {
 				$(".msg-username").text('');
-				$('input[type=submit]').prop('disabled', false);
+				$('#submit').prop('disabled', false);
 			}
 	      },
 	      error: function (textStatus, errorThrown) {

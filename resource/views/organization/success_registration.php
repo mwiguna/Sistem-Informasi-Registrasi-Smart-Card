@@ -10,7 +10,7 @@
 						</a>
 					</div>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<?= url('login') ?>">Login</a></li>
+						<li><a href="<?= url('') ?>">Login</a></li>
 					</ul>
 				</div>
 			</div>
@@ -23,7 +23,7 @@
 				<div class="col-md-offset-2 col-md-8 content">
 					<div class="main-box add-reg">
 						<p class="main-message">Pendaftaran Berhasil! Untuk menggunakan sistem silahkan scan Kartu Identitas sesuai dengan NIP / NIM Penanggung Jawab !</p>
-						<a href="<?= url('login') ?>" class="button-msg"><button class="button button-blue ">Kembali ke halaman login</button></a>
+						<a href="<?= url('') ?>" class="button-msg"><button class="button button-blue ">Kembali ke halaman login</button></a>
 					</div>
 				</div>
 			</div>
