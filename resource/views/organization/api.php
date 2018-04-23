@@ -1,22 +1,46 @@
+<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-offset-2 col-md-8">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="<?= url('') ?>">
+							<img src="<?= url('resource/assets/images/logo.png') ?>">
+							<span class="logo-text">SIREG Universitas X</span>
+						</a>
+					</div>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="<?= url('') ?>">Daftar Event</a></li>	
+						<li><a href="<?= url('logout') ?>">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
 
-<div class="container mt-4">
-	<h3>Dokumentasi API</h3>
-	<h6 class="alert alert-info">Halaman ini dikhususkan bagi <strong>Developer</strong> yang ingin mengakses data ke sistem yang dibuat</h6>
-
-	<h3 class="mt-2">API</h3>
-	<h6>Data Registrasi :</h6>
-	<h6 class=" alert alert-success">
-		<pre>
+	<div class="main grey">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-offset-2 col-md-6 section-title">
+					<p>Dokumentasi API</p>
+					<p class="api-desc">Halaman ini dikhususkan bagi <strong>Developer</strong> yang ingin mengakses data ke sistem yang dibuat</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-offset-2 col-md-8 content content-api">
+					<div class="main-box reg-detail">
+						<div class="api-section">
+							<p class="event-title api">API</p>
+							<div class="api-sub-section">
+								<p class="sub">Data Registrasi</p>
+								<pre>
 url : <a href="<?= url('api/get/'.$_SESSION['key']) ?>">https://sireg.unja.ac.id/api/get/<?= $_SESSION['key'] ?></a>
 method : GET
-</pre>
-	</h6>
-	<h6 class="alert alert-info">Data yang disediakan merupakan data mahasiswa terdaftar pada registrasi 
-	<strong><?= $registration->title ?></strong></h6>
-
-	<h6>Hapus Data Registrasi :</h6>
-	<h6 class=" alert alert-success">
-		<pre>
+								</pre>
+								<p>Data yang disediakan merupakan data mahasiswa terdaftar pada registrasi gather</p>	
+							</div>
+							<div class="api-sub-section">
+								<p class="sub">Hapus Data Registrasi</p>
+								<pre>
 url : https://sireg.unja.ac.id/api/delete 
 method : POST
 body: 
@@ -25,17 +49,32 @@ body:
 
 	nim: NIM Mahasiswa
 }
-		</pre>
-	</h6>
+								</pre>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-offset-2 col-md-8 content content-api">
+					<div class="main-box reg-detail">
+						<div class="api-section">
+							<p class="event-title api">WebHook</p>
+							<div class="api-sub-section">
 
-	<h3 class="mt-2">WebHook</h3>
+								<form class="webhook" method="POST">
+									<input class="form-control wh-input" type="text" name="url" placeholder="URL anda" value="<?= Security::decrypt($registration->url) ?>">
+									<button class="button button-blue wh-button">Submit</button>
+									<div class="clear"></div>
+									<div class="response"></div>
+								</form>
 
-	<form class="row container webhook" method="POST">
-		<input type="text"   class="col-6 form-control mr-2" name="url" placeholder="URL anda" value="<?= Security::decrypt($registration->url) ?>">
-		<input type="submit" class="col-2 btn btn-primary" value="Submit">
-		<div class="response"></div>
-	</form>
-
-	<h6 class="alert alert-info mt-3">Data akan dikirimkan setiap terdapat data baru yang masuk ke registrasi <strong>Pendaftaran Perpustakaan 2018</strong></h6>
-		
-</div>
+								<div class="clear"></div>
+								<p class="run-out-of-name-idea">Data akan dikirimkan setiap terdapat data baru yang masuk ke registrasi <strong>Pendaftaran Perpustakaan 2018</strong></p>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

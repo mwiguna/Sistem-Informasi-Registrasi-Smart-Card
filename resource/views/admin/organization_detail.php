@@ -1,41 +1,69 @@
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="<?= url('') ?>">
+						<img src="<?= url('resource/assets/images/logo.png') ?>">
+						<span class="logo-text">SIREG Universitas X</span>
+					</a>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="<?= url('home') ?>">Daftar Organisasi</a></li>
+					<li><a href="<?= url('logout') ?>">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>
 
-<div class="container">
+<div class="main grey">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-6 section-title">
+				Data Organisasi
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-3 col-md-6 content">
+				<div class="main-box reg-detail-2">
+					<p class="event-title"><?= $organization->name ?></p>
+					<table>
+						<tr>
+							<th>Penanggung Jawab</th>
+							<td>:</td>
+							<td><a target="_blank" href="<?= url('lihat_anggota/'.Security::encrypt($organization->nim)) ?>"><?= $user->nama ?></td>
+							</tr>
+							<tr>
+								<th>Email</th>
+								<td>:</td>
+								<td><?= $organization->email ?></td>
+							</tr>
+							<tr>
+								<th>No. Telp</th>
+								<td>:</td>
+								<td><?= $organization->phone ?></td>
+							</tr>
+							<tr>
+								<th>Tgl. Daftar</th>
+								<td>:</td>
+								<td><?= date('j F Y', strtotime($organization->date)) ?></td>
+							</tr>
+						</table>
+						<p class="meminta-data bold"><a href="<?= $GLOBALS['assets'].'/file/'.Security::encrypt($organization->id).'.pdf' ?>" target="_blank">Lihat Berkas</a></p>
 
-	<h3>Data Organisasi</h3>
+						<?php if($organization->verify == 0){ ?>
 
-	<table class="table">
-		<tr>
-			<td>Nama Organisasi</td>
-			<td><?= $organization->name ?></td>
-		</tr>
-		<tr>
-			<td>Penanggung Jawab</td>
-			<td><a href="<?= url('lihat_anggota/'.Security::encrypt($organization->nim)) ?>"><?= $user->nama ?></td>
-		</tr>
-		<tr>
-			<td>E-mail</td>
-			<td><?= $organization->email ?></td>
-		</tr>
-		<tr>
-			<td>No. Telp</td>
-			<td><?= $organization->phone ?></td>
-		</tr>
-		<tr>
-			<td>Tanggal Terdaftar</td>
-			<td><?= date('j F Y', strtotime($organization->date)) ?></td>
-		</tr>
-	</table>
-	
-	<a href="<?= $GLOBALS['assets'].'/file/'.Security::encrypt($organization->id).'.pdf' ?>" class="col-2 btn btn-info" target="_blank">Lihat Berkas</a>
+						<div class="middle">Organisasi belum verifikasi KTM</div>
 
-	<?php if($organization->verify == 0){ ?>
+						<?php } else if($organization->verify == 1){ ?>
 
-		<div>Organisasi belum verifikasi KTM</div>
+						<a href="<?= url('approve_organization/'.$organization->id) ?>" onclick="return confirm('Yakin?')"><button class="button button-blue button-middle button-2 bh">Setujui</button></a>
 
-	<?php } else if($organization->verify == 1){ ?>
-
-		<a class="col-2 btn btn-success" href="<?= url('approve_organization/'.$organization->id) ?>" onclick="return confirm('Yakin?')">Setujui</a>
-
-	<?php } ?>
-
-</div>
+						<?php } ?>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

@@ -23,7 +23,7 @@
 				<div class="col-md-offset-2 col-md-8 content">
 					<div class="main-box add-reg">
 						<p class="main-message">Pendaftaran Berhasil! Untuk menggunakan sistem silahkan scan Kartu Identitas sesuai dengan NIP / NIM Penanggung Jawab !</p>
-						<a href="<?= url('') ?>" class="button-msg"><button class="button button-blue ">Kembali ke halaman login</button></a>
+						<a href="<?= url('') ?>" class="button-msg"><button class="button button-blue ">Halaman Login</button></a>
 					</div>
 				</div>
 			</div>

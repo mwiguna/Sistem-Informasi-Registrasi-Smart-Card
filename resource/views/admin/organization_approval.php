@@ -41,7 +41,7 @@
 							<thead>
 								<tr>
 									<th class="col-md-1">No.</th>
-									<th class="col-md-4">Nama Organisasi</th>
+									<th class="col-md-3">Nama Organisasi</th>
 									<th class="col-md-3">Tgl. Daftar</th>
 									<th class="col-md-1">Aksi</th>
 									<th class="col-md-1"></th>
@@ -59,7 +59,7 @@
 
 										<?php if($organization->verify == 1): ?>
 
-											<a href="<?= url('detail_organisasi/'.Security::encrypt($organization->id)) ?>"><button class="button-small button-green">Lihat</button></a>
+											<a href="<?= url('detail_organisasi/'.Security::encrypt($organization->id)) ?>"><button class="button-small-5 button-green">Lihat</button></a>
 
 										<?php else: ?>
 
@@ -70,7 +70,7 @@
 									</td>
 
 									<td>
-										<a href="<?= url(' hapus_organisasi/'.$organization->id.'/1') ?>" onclick="return confirm('Yakin ingin menghapus?')"><button class="button-small button-red">Hapus</button></a>
+										<a href="<?= url(' hapus_organisasi/'.$organization->id.'/1') ?>" onclick="return confirm('Yakin ingin menghapus?')"><button class="button-small-5 button-red">Hapus</button></a>
 									</td>
 								</tr>
 								

@@ -186,6 +186,14 @@ footer	{
 	margin-bottom: 5px;
 }
 
+.small-text {
+	font-size: .5em !important;
+}
+
+.button-top {
+	padding: 2% 8% !important;
+}
+
 .main-message {
 	margin-top: 20px;
 	text-align: center;
@@ -194,13 +202,15 @@ footer	{
 }
 
 .button-msg {
-	margin-left: 35%;
-	margin-right: 35%;
+	margin-left: 34%;
+	margin-right: 34%;
 	
 }
 
 .button-msg button {
-	width: 30%;
+	padding-top: 1% !important;
+	padding-bottom: 1% !important;
+	width: 32%;
 	margin-bottom: 20px;
 }
 
@@ -223,6 +233,23 @@ footer	{
 	padding: 1% !important;
 }
 
+
+.middle {
+	text-align: center;
+	color: red;
+	margin-top: 4%;
+	margin-bottom: 2%;
+}
+
+.bh {
+	height: 35px;
+}
+
+.bc {
+	margin: 1% 38%;
+	width: 24%;
+}
+
 .button {
 	font-size: 1.1em;
 	padding: 2% 4%;
@@ -232,9 +259,58 @@ footer	{
 	border: none;
 }
 
+.pendaftar-button {
+	height: 35px;
+	width: 30%;
+}
+
+.button-2 {
+	padding: 0% 0;
+}
+
 .button-small {
-	font-size: .9em;
-	padding: 2% 4%;
+	font-size: .8em;
+	padding: 2.5% 4%;
+	font-weight: bold;
+	border-radius: 6px;
+	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+	border: none;
+}
+
+.regis {
+	font-size: 1.1em !important;
+}
+
+.button-small-2 {
+	font-size: .8em;
+	padding: 7% 12%;
+	font-weight: bold;
+	border-radius: 6px;
+	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+	border: none;
+}
+
+.button-small-3 {
+	font-size: .8em;
+	padding: 3% 9%;
+	font-weight: bold;
+	border-radius: 6px;
+	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+	border: none;
+}
+
+.button-small-4 {
+	font-size: .8em;
+	padding: 4% 8%;
+	font-weight: bold;
+	border-radius: 6px;
+	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+	border: none;
+}
+
+.button-small-5 {
+	font-size: .8em;
+	padding: 8% 13%;
 	font-weight: bold;
 	border-radius: 6px;
 	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
@@ -326,9 +402,47 @@ footer	{
 	width: 2%;
 }
 
+.reg-detail-2 th, .reg-detail-2 td {
+	vertical-align: top;
+	font-weight: normal;
+	padding: 2px 2px;
+}
+
+.reg-detail-2 th {
+	width: 63%;
+}
+
+.reg-detail-2 tr td:nth-child(2) {
+	width: 5%;
+}
+
+
+.reg-detail-3 th, .reg-detail-3 td {
+	vertical-align: top;
+	font-weight: normal;
+	padding: 2px 2px;
+}
+
+.mt-5 {
+	margin: 5% 0 1% 0;
+}
+
+.reg-detail-3 th {
+	width: 50%;
+}
+
+.reg-detail-3 tr td:nth-child(2) {
+	width: 5%;
+}
+
+.button-add-event {
+	position: relative;
+	top: 10px;
+}
+
 .button-middle {
-	margin: 0 42% 20px 42%;
-	width: 16%;
+	margin: 0 38% 20px 38%;
+	width: 24%;
 }
 
 .event-title {
@@ -376,12 +490,21 @@ footer	{
 	margin-top: 10px;
 }
 
+.msgKey {
+	text-align: center;
+	color: blue;
+}
+
 .scan-desc {
 	text-align: center;
 	font-size: .85em;
 }
 
-.key img {
+.key-mt {
+	padding-top: 30px;
+}
+
+.key-mt img {
 	margin-left: 5%;
 	width: 90%;
 	height: auto;
@@ -390,7 +513,7 @@ footer	{
 	border-radius: 5px;
 }
 
-.key input {
+.key-mt input {
 	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
 	/*width: 70%;*/
 	float: left;
@@ -461,7 +584,7 @@ footer	{
 
 .nama-mhs {
 	font-weight: bold;
-	font-size: 1.8em;
+	font-size: 1.5em;
 }
 
 .nim-mhs {
@@ -490,6 +613,10 @@ pre {
 	border: none;
 }
 
+.bold {
+	font-weight: bold;
+}
+
 .sub {
 	font-weight: bold;
 }
@@ -498,6 +625,10 @@ pre {
 	margin-bottom: 35px;
 }
 
+.response {
+	position: relative;
+	top: 10px;
+}
 
 .wh-input {
 	width: 83%;
@@ -507,7 +638,7 @@ pre {
 }
 
 .wh-button {
-	height: 35px;
+	padding: .9% 10px;
 	float: right;
 	width: 15%;
 }
@@ -523,4 +654,13 @@ pre {
 
 .run-out-of-name-idea {
 	margin-top: 20px;
+}
+
+.daftar-button {
+	background-color: #2F9AFC !important;
+}
+
+.daftar-button:hover {
+	background-color: #4DD9B1 !important;
+	color: #000 !important;
 }

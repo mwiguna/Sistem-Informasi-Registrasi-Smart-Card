@@ -43,7 +43,7 @@
 							<thead>
 								<tr>
 									<th class="col-md-1">No.</th>
-									<th class="col-md-7">Nama Organisasi</th>
+									<th class="col-md-6">Nama Organisasi</th>
 									<th class="col-md-4">Aksi</th>
 								</tr>
 							</thead>
