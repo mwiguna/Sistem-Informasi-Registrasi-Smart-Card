@@ -7,6 +7,8 @@ $route = new Route();
 $route->url("/",      "home");
 $route->url("login",  "home", "login");
 $route->url("logout", "home", "logout");
+$route->url("daftar_event",      	 "home", "events");
+$route->url("pendaftaran_event/:key", "home", "registerEvent");
 $route->url("realtime/:nim/:registrasi/:webhook?", "home", "realtime");
 $route->url("error/:type", "home", "error");
 

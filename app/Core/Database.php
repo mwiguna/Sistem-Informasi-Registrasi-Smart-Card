@@ -188,6 +188,17 @@ class Database {
     return $this;
   }
 
+  public function whereNoPrepare($field, $operation, $value = null){
+    if(!isset($value)){
+      $value     = $operation;
+      $operation = '='; 
+    }
+
+    if(strpos($this->query, 'WHERE') == true) $this->query .= "AND $field $operation $value ";
+    else $this->query .= "WHERE $field $operation $value ";
+    return $this;
+  }
+
   public function limit($start, $total = NULL){
     if($total != NULL) $this->query .= "LIMIT $start, $total ";
     else $this->query .= "LIMIT $start ";
@@ -246,8 +257,8 @@ class Database {
         $this->values[]  = $value;
       }
     }
-    $this->rows = true;
-    return $this->execute();
+    
+    return $this;
   }
 
   public function prepare($field, $operation, $value, $cond){

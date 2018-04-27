@@ -90,7 +90,7 @@ class organizationController extends Controller {
       $registration = $this->model('Registration')->select()->where('id', $id_registration)->execute();
 
       $additionals  = $this->model()
-                           ->raw("SELECT * FROM additional_member AS member JOIN additional_registration AS registration WHERE member.id_additional = registration.id AND member.nim = '$nim' AND registration.id_registration = '$registration->id'");
+                           ->raw("SELECT * FROM additional_member AS member JOIN additional_registration AS registration WHERE member.id_additional = registration.id AND member.nim = '$nim' AND registration.id_registration = '$registration->id'")->get();
 
       foreach($additionals as $additional){
         if($additional->nim == $nim) $dataAdditional []= (object) array("desc" => $additional->description, "val" => $additional->value);
@@ -120,6 +120,7 @@ class organizationController extends Controller {
   public function addRegistration(){
     $this->middleware();
     return $this->view('organization/add_registration');    
+
   }
 
   public function processAddRegistration(){
@@ -128,6 +129,8 @@ class organizationController extends Controller {
     $registration = $this->model('Registration')->insert([
             "title"           => $_POST['title'],
             "id_organization" => $id_organization,
+            "start_date"  => $_POST['start'],
+            "end_date"    => $_POST['end'],
             "description" => $_POST['description'],
             "privacy"     => (isset($_POST['privacy'])) ? 1 : 0,
           ])->execute();
@@ -243,7 +246,7 @@ class organizationController extends Controller {
     $datas = $this->model('Member')->select()->where('id_registration', $registration->id)->get();
     
     $additionals  = $this->model()
-                           ->raw("SELECT * FROM additional_member AS member JOIN additional_registration AS registration WHERE member.id_additional = registration.id AND registration.id_registration = '$registration->id'");
+                           ->raw("SELECT * FROM additional_member AS member JOIN additional_registration AS registration WHERE member.id_additional = registration.id AND registration.id_registration = '$registration->id'")->get();
 
     $additionalTypes = $this->model('AdditionalRegistration')
                             ->select(['description'])

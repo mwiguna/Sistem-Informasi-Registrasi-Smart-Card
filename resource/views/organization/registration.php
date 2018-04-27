@@ -39,6 +39,12 @@
 					<div class="col-md-12">
 						<?= $registration->description ?>
 					</div>
+					<div class="col-md-12"> Jadwal Pendaftaran :
+						<?= 
+							date("j F Y", strtotime($registration->start_date)) . " - " .
+							date("j F Y", strtotime($registration->end_date))
+						?>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12 panel panel-default content">
@@ -105,9 +111,11 @@
 					</div>
 					
 					<div class="clear"></div>
-					
+
 					<a href="<?= url('dokumentasi_api') ?>"><button class="button button-medium button-green full-width doc-api a-little-space">Dokumentasi API</button></a>
 					
+					<a href="<?= url('edit_event/'.$_SESSION['key']) ?>"><button class="button button-medium button-blue full-width a-little-space">Edit Informasi Event</button></a>
+
 					<a href="<?= url('data_tambahan/'.$_SESSION['key']) ?>"><button class="button button-medium button-blue full-width a-little-space">Data Tambahan</button></a>
 					
 					<div class="hiddenTable"></div>

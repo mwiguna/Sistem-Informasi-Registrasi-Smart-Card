@@ -68,7 +68,7 @@
 									<tr>
 										<td><?= $i ?></td>
 										<td><?= $registration->title ?></td>
-										<td><?= date('j F Y', strtotime($registration->date)) ?></td>
+										<td><?= date('j F Y', strtotime($registration->start_date)) ?></td>
 										<td>
 											<a href="<?= url('lihat_registrasi/'.Security::encrypt($registration->id)) ?>"><button class="button-small-4 button-green">Lihat</button></a>
 											<a href="<?= url('hapus_registrasi/'.Security::encrypt($registration->id)) ?>" onclick="return confirm('Yakin ingin menghapus?')"><button class="button-small-4 button-red">Hapus</button></a>

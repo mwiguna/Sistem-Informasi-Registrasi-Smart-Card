@@ -28,6 +28,7 @@
 					<div class="welcome-text-1">Selamat datang</div>
 					<div class="welcome-text-2">
 						SIREG adalah platform terintegrasi yang ditujukan bagi pengelola organisasi di lingkungan Universitas X untuk mengelola pendaftaran kegiatan organisasi. SIREG menggunakan KTM berbasis NFC sehingga proses pendaftaran menjadi lebih mudah, cepat, dan akurat.
+						<a href="<?= url('daftar_event') ?>" class="main-button"><br>Lihat Daftar Event Universitas</a>
 					</div>
 				</div>
 				<div class="login-form col-md-3">

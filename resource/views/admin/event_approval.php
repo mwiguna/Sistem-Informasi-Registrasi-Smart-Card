@@ -53,7 +53,7 @@
 								<tr>
 									<td><?= $i ?></td>
 									<td><?= $registration->title ?></td>
-									<td><?= date('j F Y', strtotime($registration->date)) ?></td>
+									<td><?= date('j F Y', strtotime($registration->start_date)) ?></td>
 									<td>
 										<a href="<?= url('detail_persetujuan/'.Security::encrypt($registration->id)) ?>"><button class="button-small-2 button-green">Lihat</button></a>
 									</td>

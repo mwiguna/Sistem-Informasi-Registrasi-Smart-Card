@@ -23,6 +23,7 @@
  */
  
     define('QR_IMAGE', true);
+    error_reporting(E_ALL ^ E_WARNING);
 
     class QRimage {
     

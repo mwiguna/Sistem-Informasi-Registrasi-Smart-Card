@@ -38,6 +38,23 @@ class homeController extends Controller {
     $this->redirect('');
   }
 
+  public function events(){
+    $events = $this->model()->raw("SELECT *, registrations.id AS id FROM registrations JOIN organizations WHERE organizations.id = registrations.id_organization")->get();
+
+    return $this->view('page/events', ['events' => $events]);
+  }
+
+  public function registerEvent($key){
+    if(!Security::valid($key)) $this->redirect('daftar_event');
+
+    $id = Security::decrypt($key);
+    $event = $this->model()->raw("SELECT *, registrations.id AS id FROM registrations JOIN organizations WHERE organizations.id = registrations.id_organization AND registrations.id = $id")->execute();
+
+    require_once $this->root('lib/phpqrcode/qrlib.php');
+    QRcode::png($key, $this->root('resource/assets/qrcode/'.$key.'.png'), 'L', 4, 2);
+    return $this->view('page/register_event', ['event' => $event, 'key' => $key]);
+  }
+
   public function realtime($nim, $registrasi, $webhook = 0){
     echo $this->view('page/realtime', ['nim' => $nim, 'registrasi' => $registrasi, 'webhook' => $webhook]);
   }
