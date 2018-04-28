@@ -28,6 +28,7 @@ $route->url("lihat_organisasi/:id", "organization", "showOrganization");
 $route->url("lihat_registrasi/:id", "organization", "showRegistration");
 $route->url("lihat_anggota/:nim", 	"organization", "memberDetail");
 $route->url("tambah_registrasi", 	"organization", "addRegistration");
+$route->url("edit_registrasi/:id",	"organization", "editRegistration");
 $route->url("dokumentasi_api", 	    "organization", "apiDocumentation");
 $route->url("tambah_url", 			"organization", "addURL");
 $route->url("hapus_registrasi/:id", "organization", "deleteRegistration");
@@ -39,6 +40,7 @@ $route->url("tambah_data_tambahan",        "organization", "addAdditional");
 $route->url("tambah_data_tambahan_member", "organization", "addAdditionalMember");
 $route->url("hapus_tambahan/:data",		   "organization", "deleteAdditional");
 $route->url("proses_tambah_registrasi",    "organization", "processAddRegistration");
+$route->url("proses_edit_registrasi",  	   "organization", "processEditRegistration");
 
 //--------------- Restful -----------------//
 

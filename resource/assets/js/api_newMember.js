@@ -22,7 +22,7 @@
 						<td>${data.nama}</td>
 						<td>
 							<a href="../lihat_anggota/${msg.nim}"><button class="button-small-3 button-green">Lihat</button></a>
-							<a href="../lihat_anggota/${msg.nim}" onclick="return confirm('Yakin ingin menghapus?')"><button class="button-small-3 button-red">Hapus</button></a>
+							<a href="../hapus_anggota/${msg.nim}" onclick="return confirm('Yakin ingin menghapus?')"><button class="button-small-3 button-red">Hapus</button></a>
 						</td>
 					</tr>`
 		    	);

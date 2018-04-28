@@ -39,7 +39,7 @@ class homeController extends Controller {
   }
 
   public function events(){
-    $events = $this->model()->raw("SELECT *, registrations.id AS id FROM registrations JOIN organizations WHERE organizations.id = registrations.id_organization")->get();
+    $events = $this->model()->raw("SELECT *, registrations.id AS id FROM registrations JOIN organizations WHERE organizations.id = registrations.id_organization ORDER BY registrations.start_date DESC")->get();
 
     return $this->view('page/events', ['events' => $events]);
   }

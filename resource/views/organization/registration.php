@@ -114,7 +114,7 @@
 
 					<a href="<?= url('dokumentasi_api') ?>"><button class="button button-medium button-green full-width doc-api a-little-space">Dokumentasi API</button></a>
 					
-					<a href="<?= url('edit_event/'.$_SESSION['key']) ?>"><button class="button button-medium button-blue full-width a-little-space">Edit Informasi Event</button></a>
+					<a href="<?= url('edit_registrasi/'.$_SESSION['key']) ?>"><button class="button button-medium button-blue full-width a-little-space">Edit Informasi Event</button></a>
 
 					<a href="<?= url('data_tambahan/'.$_SESSION['key']) ?>"><button class="button button-medium button-blue full-width a-little-space">Data Tambahan</button></a>
 					

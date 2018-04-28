@@ -139,6 +139,31 @@ class organizationController extends Controller {
     else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
   }
 
+  public function editRegistration(){
+    $this->middleware($this->checkKeyExist());
+
+    $id = Security::decrypt($_SESSION['key']);
+    $registration = $this->Model('Registration')->select()->where('id', $id)->execute();
+
+    return $this->view('organization/edit_registration', ['registration' => $registration]);
+  }
+
+  public function processEditRegistration(){
+    $this->middleware($this->checkKeyExist());
+
+    $id = Security::decrypt($_SESSION['key']);
+    $registration = $this->model('Registration')->update([
+            "title"       => $_POST['title'],
+            "start_date"  => $_POST['start'],
+            "end_date"    => $_POST['end'],
+            "description" => $_POST['description'],
+            "privacy"     => (isset($_POST['privacy'])) ? 1 : 0,
+          ])->where('id', $id)->execute();
+
+    if($registration) $this->redirect("lihat_registrasi/".$_SESSION['key']);
+    else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
+  }
+
 
   // ------------ Delete
 
@@ -309,10 +334,14 @@ class organizationController extends Controller {
     }
   }
 
+  public function checkKeyExist(){
+    return (isset($_SESSION['key'])) ? $_SESSION['key'] : 'invalid';
+  }
+
   public function middleware($key = null){
     if(!isset($this->userId)) $this->redirect('');
     if(!empty($key)){
-      if(!Security::valid($key)) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id)); 
+      if(!Security::valid($key)) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id));
     }
   }
 
