@@ -17,14 +17,14 @@
 		  		number  = current + 1;
 		     	$("#member").append(
 		    		`<tr>
-		    			<td class="number">${number}</td>
-		    			<td>${data.nim}</td>
-		    			<td>${data.nama}</td>
-		    			<td>
-							<a href="../lihat_anggota/${msg.nim}" class="btn btn-primary">Lihat</a>
-							<a href="../hapus_anggota/${msg.nim}" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+						<td class="number">${number}</td>
+						<td>${data.nim}</td>
+						<td>${data.nama}</td>
+						<td>
+							<a href="../lihat_anggota/${msg.nim}"><button class="button-small-3 button-green">Lihat</button></a>
+							<a href="../lihat_anggota/${msg.nim}" onclick="return confirm('Yakin ingin menghapus?')"><button class="button-small-3 button-red">Hapus</button></a>
 						</td>
-		    		</tr>`
+					</tr>`
 		    	);
 		  	}
 	      },

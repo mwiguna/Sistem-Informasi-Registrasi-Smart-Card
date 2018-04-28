@@ -73,11 +73,11 @@
 
 								<?php else: ?>
 
-									<tbody>
+									<tbody id="member">
 
 									<?php $i = 1; foreach ($members as $member): ?>
 										<tr>
-											<td><?= $i ?></td>
+											<td class="number"><?= $i ?></td>
 											<td><?= $member->nim ?></td>
 											<td><?= $member->nama ?></td>
 											<td>
