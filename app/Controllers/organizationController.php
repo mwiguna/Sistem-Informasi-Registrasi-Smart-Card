@@ -294,7 +294,8 @@ class organizationController extends Controller {
     $registration = $this->model('Registration')->select()
                          ->where('id', Security::decrypt($_SESSION['key']))->execute();
 
-    return $this->view('organization/api', ['registration' => $registration]);
+    $token = Security::encrypt(json_encode(array(0 => $registration->id_organization, 1 => $registration->id)));
+    return $this->view('organization/api', ['registration' => $registration, 'token' => $token]);
   }
 
   public function addURL(){

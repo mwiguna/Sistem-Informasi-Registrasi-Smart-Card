@@ -33,7 +33,7 @@
 							<div class="api-sub-section">
 								<p class="sub">Data Registrasi</p>
 								<pre>
-url : <a href="<?= url('api/get/'.$_SESSION['key']) ?>">https://sireg.unja.ac.id/api/get/<?= $_SESSION['key'] ?></a>
+url : <a href="<?= url('api/get/'.$token) ?>">https://sireg.unja.ac.id/api/get/<?= $token ?></a>
 method : GET
 								</pre>
 								<p>Data yang disediakan merupakan data mahasiswa terdaftar pada registrasi gather</p>	
@@ -45,7 +45,7 @@ url : https://sireg.unja.ac.id/api/delete
 method : POST
 body: 
 {
-	key: <?= $_SESSION['key']; ?>
+	key: <?= $token ?>
 
 	nim: NIM Mahasiswa
 }
