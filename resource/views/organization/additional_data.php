@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-offset-2 col-md-8">
+				<div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="<?= url('') ?>">
 							<img src="<?= url('resource/assets/images/logo.png') ?>">
@@ -19,12 +19,12 @@
 	<div class="main grey">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-offset-2 col-md-8 section-title">
+				<div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 section-title">
 					Data Tambahan
 				</div>
 			</div>
 			<div class="row add-form">
-				<div class="col-md-offset-2 col-md-8">
+				<div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
 					<form method="POST" action="<?= url('tambah_data_tambahan') ?>">
 						<input class="form-control" type="text" name="data" placeholder="Masukkan data tambahan yang diperlukan" required>
 						<button class="button button-2 button-blue">Tambah</button>
@@ -32,7 +32,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-offset-2 col-md-8 panel panel-default content-2">
+				<div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 panel panel-default content-2">
 					<table class="table table-hover main-table">
 						<thead>
 							<tr>
@@ -56,7 +56,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-offset-2 col-md-8">
+				<div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
 					<a href="<?= url('halaman_pendaftar/'.$_SESSION['key']) ?>"><button class="button button-2 button-blue pendaftar-button">Halaman Pendaftar &raquo;</button></a>
 				</div>
 			</div>

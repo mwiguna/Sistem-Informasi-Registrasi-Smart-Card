@@ -2,7 +2,7 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-offset-2 col-md-8">
+			<div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="<?= url('') ?>">
 						<img src="<?= url('resource/assets/images/logo.png') ?>">
@@ -31,7 +31,7 @@
 <div class="main grey">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-offset-2 col-md-6">
+			<div class="col-md-offset-1 col-md-7 col-lg-offset-2 col-lg-6">
 				<div class="row">
 					<div class="col-md-12 section-title">
 						<?= $registration->title ?>
@@ -100,7 +100,7 @@
 
 					</div>
 				</div>
-				<div class="col-md-2 key-mt">
+				<div class="col-md-3 col-lg-2 key-mt">
 					<p class="scan-desc">Scan QR code atau gunakan kode di bawah ini untuk setting pada Pembaca Kartu</p>
 					<img src="<?= url('resource/assets/qrcode/'.basename($_SESSION['key'])) ?>.png" />
 					
@@ -114,7 +114,7 @@
 
 					<a href="<?= url('dokumentasi_api') ?>"><button class="button button-medium button-green full-width doc-api a-little-space">Dokumentasi API</button></a>
 					
-					<a href="<?= url('edit_registrasi/'.$_SESSION['key']) ?>"><button class="button button-medium button-blue full-width a-little-space">Edit Informasi Event</button></a>
+					<a href="<?= url('edit_registrasi/'.$_SESSION['key']) ?>"><button class="button button-medium button-blue-2 full-width a-little-space">Edit Informasi Event</button></a>
 
 					<a href="<?= url('data_tambahan/'.$_SESSION['key']) ?>"><button class="button button-medium button-blue full-width a-little-space">Data Tambahan</button></a>
 					

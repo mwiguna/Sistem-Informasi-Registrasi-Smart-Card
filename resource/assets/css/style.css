@@ -270,7 +270,7 @@ footer	{
 
 .button-small {
 	font-size: .8em;
-	padding: 2.5% 4%;
+	padding: 2% 4%;
 	font-weight: bold;
 	border-radius: 6px;
 	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
@@ -283,7 +283,7 @@ footer	{
 
 .button-small-2 {
 	font-size: .8em;
-	padding: 7% 12%;
+	padding: 4.5% 12%;
 	font-weight: bold;
 	border-radius: 6px;
 	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
@@ -301,7 +301,7 @@ footer	{
 
 .button-small-4 {
 	font-size: .8em;
-	padding: 4% 8%;
+	padding: 3% 8%;
 	font-weight: bold;
 	border-radius: 6px;
 	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
@@ -328,6 +328,11 @@ footer	{
 
 .button-blue {
 	background-color: #2E99FD;
+	color: #fff;
+}
+
+.button-blue-2 {
+	background-color: #724ecd;
 	color: #fff;
 }
 

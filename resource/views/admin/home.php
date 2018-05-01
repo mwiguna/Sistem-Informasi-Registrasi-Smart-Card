@@ -1,7 +1,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-offset-2 col-md-8">
+				<div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="<?= url('') ?>">
 							<img src="<?= url('resource/assets/images/logo.png') ?>">
@@ -20,16 +20,16 @@
 	<div class="main grey">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-offset-2 col-md-4 section-title">
+				<div class="col-md-offset-1 col-md-5 col-lg-offset-2 col-lg-4 section-title">
 					Daftar Organisasi
 				</div>
-				<div class="col-md-4 top-button">
+				<div class="col-md-5 col-lg-4 top-button">
 					<a href="<?= url('persetujuan_event') ?>"><button class="button button-green button-right">Persetujuan Event</button></a>
 					<a href="<?= url('persetujuan_organisasi') ?>"><button class="button button-green button-left">Persetujuan Organisasi</button></a>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-offset-2 col-md-8 panel panel-default content">
+				<div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 panel panel-default content">
 
 					<?php if(empty($organizations)): ?>
 

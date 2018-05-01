@@ -2,7 +2,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-offset-2 col-md-8">
+				<div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="<?= url('') ?>">
 							<img src="<?= url('resource/assets/images/logo.png') ?>">
@@ -10,9 +10,7 @@
 						</a>
 					</div>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<?= url('') ?>">Login</a></li>
-						<li class="atau">atau</li>
-						<li><a href="<?= url('daftar') ?>">Daftar</a></li>
+						<li><a href="<?= url('daftar_event') ?>">Daftar Event</a></li>
 					</ul>
 				</div>
 			</div>
@@ -22,13 +20,13 @@
 	<div class="main main-home">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="welcome-text col-md-offset-2 col-md-5">
+				<div class="welcome-text col-md-offset-1 col-md-6 col-lg-offset-2 col-lg-5">
 					<div class="welcome-text-1">Selamat datang</div>
 					<div class="welcome-text-2">
 						SIREG adalah platform terintegrasi yang ditujukan bagi pengelola organisasi di lingkungan Universitas X untuk mengelola pendaftaran kegiatan organisasi. SIREG menggunakan KTM berbasis NFC sehingga proses pendaftaran menjadi lebih mudah, cepat, dan akurat.
 					</div>
 				</div>
-				<div class="login-form col-md-3">
+				<div class="login-form col-md-4 col-lg-3">
 					<form method="POST" action="<?= url('register') ?>" enctype="multipart/form-data">
 						<label>Daftar</label>
 						<div class="clear"></div>
