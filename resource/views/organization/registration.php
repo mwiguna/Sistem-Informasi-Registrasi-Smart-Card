@@ -11,13 +11,15 @@
 				</div>
 				<ul class="nav navbar-nav navbar-right">
 					
-					<?php if($registration->id_organization == 1): ?>
-					
+					<?php 
+						$nav = ($this->user()->role == 1) ? "Daftar Organisasi" : "Daftar Event";
+						if($registration->id_organization == 1):
+					?>
 						<li><a href="<?= url('home') ?>">Daftar Organisasi</a></li>	
 					
 					<?php else: ?>
 
-						<li><a href="<?= url('') ?>">Daftar Event</a></li>	
+						<li><a href="<?= url('') ?>"><?= $nav ?></a></li>	
 
 					<?php endif; ?>
 
@@ -57,7 +59,7 @@
 
 						<?php else: ?>
 
-							<table class="table table-hover main-table">
+							<table id="member" class="table table-hover main-table">
 								<thead>
 									<tr>
 										<th class="col-md-1">No.</th>
@@ -66,14 +68,13 @@
 										<th class="col-md-3">Aksi</th>
 									</tr>
 								</thead>
+								<tbody>
 
 								<?php if(empty($members)): ?>
 
 									<div class="col-12 alert alert-info nodata">Belum ada anggota terdaftar</div>
 
 								<?php else: ?>
-
-									<tbody id="member">
 
 									<?php $i = 1; foreach ($members as $member): ?>
 										<tr>
@@ -87,10 +88,11 @@
 										</tr>
 
 									<?php $i++; endforeach?>
-
-									</tbody>
-
+								
 								<?php endif; ?>
+
+								</tbody>
+
 
 							</table>
 
@@ -128,3 +130,5 @@
 
 		</div>
 	</div>
+
+<script src="<?= $GLOBALS['assets'] ?>/js/api_newMember.js"></script>

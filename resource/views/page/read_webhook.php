@@ -1,6 +1,10 @@
 <div id="data"></div>
 
 <script>
+$(document).ready(function(){
+	$("footer").remove();
+})
+
 	conn.onmessage = function(msg){
     	msg = JSON.parse(msg.data);
 
@@ -17,5 +21,4 @@
 	      }
 		});
     }
-
 </script>
