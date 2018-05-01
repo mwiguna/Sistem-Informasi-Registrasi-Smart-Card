@@ -57,6 +57,17 @@ class adminController extends Controller {
     else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
   }
 
+  public function unApproveEvent($id){
+    $this->middleware();
+
+    $registration = $this->model('Registration')->update([
+            "verify" => 2,
+          ])->where('id', $id)->execute();
+
+    if($registration) $this->redirect("persetujuan_event");
+    else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
+  }
+
 
   public function approveOrganization($id){
     $this->middleware();

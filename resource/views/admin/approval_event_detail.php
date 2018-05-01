@@ -47,6 +47,7 @@
 							- Alamat <br />
 						</div>
 						<a href="<?= url('approve_event/'.$registration->id) ?>" onclick="return confirm('Yakin?')"><button class="button button-blue button-middle button-2 bh">Setujui</button></a>
+						<a href="<?= url('unapprove_event/'.$registration->id) ?>" onclick="return confirm('Yakin?')"><button class="button button-red button-middle button-2 bh">TIDAK SETUJU</button></a>
 					</div>
 				</div>
 			</div>

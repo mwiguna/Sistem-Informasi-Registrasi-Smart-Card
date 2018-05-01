@@ -31,7 +31,9 @@
 						<label>Daftar</label>
 						<div class="clear"></div>
 						
-						<input type="text" name="name" placeholder="Nama Organisasi" required pattern=".{1,60}" title="Nama Organisasi Maksimum 60 Karakter"/>
+						<div class="msg-name daftar-msg"></div>
+						<input class="validate-name" type="text" name="name" placeholder="Nama Organisasi" required pattern=".{1,60}" title="Nama Organisasi Maksimum 60 Karakter"/>
+
 						<input type="text" name="nim" placeholder="NIP/NIM Penanggung Jawab" required pattern=".{9,18}" title="Mohon masukkan NIP / NIM yang valid" />
 						<input type="number" name="phone" placeholder="Nomor Telepon" required />
 						<input type="email" name="email" placeholder="Email" required />

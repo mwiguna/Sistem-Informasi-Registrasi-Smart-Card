@@ -21,6 +21,27 @@
 		}
 	});
 
+	$(document).on("keyup", ".validate-name", function(e){	
+	 	$.ajax({
+		  url: "cek_name",
+		  method: "POST",
+		  data: {name: $("input[name*='name']").val()},
+		  success: function (response) {
+		  	if(response == 1){
+		  		$(".msg-name").text('Organisasi sudah pernah terdaftar');
+				$('#submit').prop('disabled', true);
+			} else {
+				$(".msg-name").text('');
+				$('#submit').prop('disabled', false);
+			}
+	      },
+	      error: function (textStatus, errorThrown) {
+	      	alert("Terjadi kesalahan. Silahkan coba beberapa saat lagi");
+	        console.log(textStatus + errorThrown);
+	      }
+		});
+	});
+
 	$(document).on("keyup", ".validate-username", function(e){	
 	 	$.ajax({
 		  url: "cek_username",

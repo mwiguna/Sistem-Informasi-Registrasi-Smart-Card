@@ -18,11 +18,13 @@ $route->url("persetujuan_organisasi",   "admin", "organizationApproval");
 $route->url("detail_organisasi/:id",    "admin", "organizationDetail");
 $route->url("detail_persetujuan/:id",   "admin", "approvalDetail");
 $route->url("approve_event/:id", 		"admin", "approveEvent");
+$route->url("unapprove_event/:id", 		"admin", "unApproveEvent");
 $route->url("approve_organization/:id", "admin", "approveOrganization");
 $route->url("hapus_organisasi/:id/:verifyPage",  "admin", "deleteOrganization");
 
 $route->url("daftar",  		"organization", "registration");
 $route->url("register", 	"organization", "register");
+$route->url("cek_name", 	"organization", "checkName");
 $route->url("cek_username", "organization", "checkUsername");
 $route->url("lihat_organisasi/:id", "organization", "showOrganization");
 $route->url("lihat_registrasi/:id", "organization", "showRegistration");

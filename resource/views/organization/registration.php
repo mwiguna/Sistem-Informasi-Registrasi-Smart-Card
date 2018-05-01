@@ -51,13 +51,19 @@
 				<div class="row">
 					<div class="col-md-12 panel panel-default content">
 
-						<?php if($registration->privacy == 1 && $registration->verify == 0): ?>
+						<?php if($registration->privacy == 1 && $registration->verify == 0){ ?>
 
 							<div class="main-box add-reg">
 								<p class="main-message regis">Registrasi ini memerlukan data privasi, maka perlu menunggu persetujuan dari pihak LPTIK agar registrasi ini dapat digunakan.</p>
 							</div>
 
-						<?php else: ?>
+						<?php } else if($registration->privacy == 1 && $registration->verify == 2) { ?>
+
+							<div class="main-box add-reg">
+								<p class="main-message regis">Persetujuan data privasi untuk event ini telah ditolak. <br /> Silahkan edit event dengan tanpa data privasi.</p>
+							</div>
+
+						<?php } else { ?>
 
 							<table id="member" class="table table-hover main-table">
 								<thead>
@@ -96,7 +102,7 @@
 
 							</table>
 
-						<?php endif; ?>
+						<?php } ?>
 
 						</div>
 

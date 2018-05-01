@@ -10,6 +10,12 @@ class organizationController extends Controller {
   	return $this->view('organization/daftar');
   }
 
+  public function checkName(){
+    $user = $this->model('Organization')->select()->where('name', $_POST['name'])->execute();
+    if(!empty($user)) echo 1;
+    else echo 0; 
+  }
+
   public function checkUsername(){
     $user = $this->model('Organization')->select()->where('username', $_POST['username'])->execute();
     if(!empty($user)) echo 1;
@@ -125,7 +131,7 @@ class organizationController extends Controller {
 
   public function processAddRegistration(){
     $id_organization = $this->user()->id;
-    $this->checkDate();
+    $this->checkDate(false);
 
     $registration = $this->model('Registration')->insert([
             "title"           => $_POST['title'],
@@ -151,7 +157,7 @@ class organizationController extends Controller {
 
   public function processEditRegistration(){
     $this->middleware($this->checkKeyExist());
-    $this->checkDate();
+    $this->checkDate(true);
 
     $id = Security::decrypt($_SESSION['key']);
     $registration = $this->model('Registration')->update([
@@ -162,11 +168,10 @@ class organizationController extends Controller {
             "privacy"     => (isset($_POST['privacy'])) ? 1 : 0,
           ])->where('id', $id)->execute();
 
-    if($registration) $this->redirect("lihat_registrasi/".$_SESSION['key']);
-    else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
+    $this->redirect("lihat_registrasi/".$_SESSION['key']);
   }
 
-  public function checkDate(){
+  public function checkDate($edit){
     $now   = new DateTime(date('Y-m-d'));
     $start = new DateTime($_POST['start']);
     $end   = new DateTime($_POST['end']);
@@ -177,7 +182,7 @@ class organizationController extends Controller {
     $diffStart = (integer) $diffStart->format( "%R%a");
     $diffLeft  = (integer) $diffLeft->format( "%R%a");
 
-    if($diffStart < 0) die("Tanggal mulai pendaftaran sudah lewat");
+    if(!$edit) if($diffStart < 0) die("Tanggal mulai pendaftaran sudah lewat");
     if($diffLeft < 0) die("Event tidak dapat ditutup sebelum dimulai"); 
   } 
 

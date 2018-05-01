@@ -42,7 +42,9 @@
 							Jadwal Pendaftaran Ditutup :
 							<input type="date" name="end" class="form-control mb-2 add-title" placeholder="yyyy-mm-dd" title="Judul Maksimum 80 Karakter" value="<?= $registration->end_date ?>" required>
 							
-							<input type="checkbox" name="privacy"> <span class="add-priv"> Membutuhkan data private*</span>
+							<?php $isNeedPrivate = ($registration->privacy == 1) ? "checked" : ""; ?>
+
+							<input type="checkbox" name="privacy" <?= $isNeedPrivate ?>> <span class="add-priv"> Membutuhkan data private*</span>
 							
 							<button class="button button-blue button-middle button-add-event">Edit</button>
 							<p class="priv-desc">* Untuk mendapatkan data private dibutuhkan persetujuan dari pihak LPTIK. Data private meliputi nomor telepon, email, dan alamat mahasiswa.</p>
