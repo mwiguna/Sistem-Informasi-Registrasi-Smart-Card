@@ -428,6 +428,10 @@ footer	{
 	padding: 2px 2px;
 }
 
+.reg-detail-4 th {
+	width: 43%;
+}
+
 .mt-5 {
 	margin: 5% 0 1% 0;
 }
