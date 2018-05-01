@@ -125,6 +125,7 @@ class organizationController extends Controller {
 
   public function processAddRegistration(){
     $id_organization = $this->user()->id;
+    $this->checkDate();
 
     $registration = $this->model('Registration')->insert([
             "title"           => $_POST['title'],
@@ -150,6 +151,7 @@ class organizationController extends Controller {
 
   public function processEditRegistration(){
     $this->middleware($this->checkKeyExist());
+    $this->checkDate();
 
     $id = Security::decrypt($_SESSION['key']);
     $registration = $this->model('Registration')->update([
@@ -163,6 +165,21 @@ class organizationController extends Controller {
     if($registration) $this->redirect("lihat_registrasi/".$_SESSION['key']);
     else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
   }
+
+  public function checkDate(){
+    $now   = new DateTime(date('Y-m-d'));
+    $start = new DateTime($_POST['start']);
+    $end   = new DateTime($_POST['end']);
+
+    $diffLeft  = $start->diff($end);
+    $diffStart = $now->diff($start);
+
+    $diffStart = (integer) $diffStart->format( "%R%a");
+    $diffLeft  = (integer) $diffLeft->format( "%R%a");
+
+    if($diffStart < 0) die("Tanggal mulai pendaftaran sudah lewat");
+    if($diffLeft < 0) die("Event tidak dapat ditutup sebelum dimulai"); 
+  } 
 
 
   // ------------ Delete

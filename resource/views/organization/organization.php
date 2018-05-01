@@ -49,15 +49,14 @@
 					<?php if(empty($registrations)): ?>
 
 						<div class="main-box add-reg">
-							<p class="main-message">Registrasi masih kosong.</p>
+							<p class="main-message">Data registrasi masih kosong, silahkan isi menu registrasi.</p>
 						</div>
 
 					<?php else: ?>
 
 						<table class="table table-hover main-table">
 							<thead>
-								<tr>
-									<th class="col-md-1">No.</th>
+								<tr>							<th class="col-md-1">No.</th>
 									<th class="col-md-5">Perihal</th>
 									<th class="col-md-3">Tanggal</th>
 									<th class="col-md-3">Aksi</th>

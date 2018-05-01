@@ -34,7 +34,7 @@
 							
 							<input type="text" name="title" class="form-control mb-2 add-title" placeholder="Judul" pattern=".{1,80}" title="Judul Maksimum 80 Karakter" required>
 							
-							<textarea name="description" class="form-control mb-2 add-desc" placeholder="Deskripsi" pattern=".{1,255}" title="Deskripsi Maksimum 255 Karakter" required></textarea>
+							<textarea name="description" class="form-control mb-2 add-desc" placeholder="Deskripsi" required></textarea>
 
 							Jadwal Pendaftaran Dibuka :
 							<input type="date" name="start" class="form-control mb-2 add-title" placeholder="yyyy-mm-dd" title="Judul Maksimum 80 Karakter" required>
