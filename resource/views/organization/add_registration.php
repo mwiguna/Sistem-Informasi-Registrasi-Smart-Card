@@ -44,7 +44,7 @@
 							
 							<input type="checkbox" name="privacy"> <span class="add-priv"> Membutuhkan data private*</span>
 							
-							<button class="button button-blue button-middle button-add-event">Tambah</button>
+							<button class="button button-blue button-middle-2 button-add-event">Tambah</button>
 							<p class="priv-desc">* Untuk mendapatkan data private dibutuhkan persetujuan dari pihak LPTIK. Data private meliputi nomor telepon, email, dan alamat mahasiswa.</p>
 						</form>
 					</div>

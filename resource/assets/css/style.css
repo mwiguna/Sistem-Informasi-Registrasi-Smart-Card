@@ -337,6 +337,10 @@ footer	{
 	color: #fff;
 }
 
+.button-blue-2:hover {
+	background-color: #781364;
+}
+
 .button-blue:hover {
 	background-color: #0a69c1;
 }
@@ -451,8 +455,26 @@ footer	{
 }
 
 .button-middle {
+	/*margin: 0 38% 20px 38%;*/
+	margin: 0 .7% 20px .7%;
+	width: 30%;
+}
+
+.button-refresh {
+	padding: 5px 15px !important;
+}
+
+.refreshsh {
+	padding-top: 52px;
+}
+
+.button-middle-2 {
 	margin: 0 38% 20px 38%;
 	width: 24%;
+}
+
+.button-group {
+	margin-left: 27%;
 }
 
 .event-title {
