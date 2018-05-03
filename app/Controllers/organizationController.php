@@ -73,7 +73,7 @@ class organizationController extends Controller {
 
     $registration = $this->model('Registration')->select()->where('id', $id)->execute();
     if($registration->id_organization != $this->user()->id && $this->user()->role != 1) $this->redirect('lihat_organisasi/'.Security::encrypt($this->user()->id));
-    
+  
     $members = $this->getDataMembers($registration->id);
 
     $_SESSION['privacy'] = ($registration->privacy == 1) ? true : false;
@@ -136,6 +136,7 @@ class organizationController extends Controller {
     $registration = $this->model('Registration')->insert([
             "title"           => $_POST['title'],
             "id_organization" => $id_organization,
+            "max_peserta" => $_POST['max'],
             "start_date"  => $_POST['start'],
             "end_date"    => $_POST['end'],
             "description" => $_POST['description'],
@@ -162,6 +163,7 @@ class organizationController extends Controller {
     $id = Security::decrypt($_SESSION['key']);
     $registration = $this->model('Registration')->update([
             "title"       => $_POST['title'],
+            "max_peserta" => $_POST['max'],
             "start_date"  => $_POST['start'],
             "end_date"    => $_POST['end'],
             "description" => $_POST['description'],
@@ -194,7 +196,10 @@ class organizationController extends Controller {
     $this->middleware($id);
     $registration = $this->model('Registration')->delete()->where('id', Security::decrypt($id))->execute();
 
-    if($registration) $this->redirect("lihat_organisasi/".Security::encrypt($this->user()->id));
+    if($registration){
+      if($this->user()->role = 1) $this->redirect("");
+      $this->redirect("lihat_organisasi/".Security::encrypt($this->user()->id));
+    } 
     else die('Terjadi kesalahan. Mohon ulangi beberapa saat lagi');
   }
 

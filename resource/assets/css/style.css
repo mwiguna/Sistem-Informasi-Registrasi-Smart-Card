@@ -13,10 +13,19 @@
 	background-image: url("../images/bg.jpg");
 }
 
+.button-download {
+	padding: 2px 10px !important;
+}
+
+.link-download {
+	position: relative;
+	top: 20px;
+	font-size: .7em;
+}
+
 .navbar-default {
 	background-color: #292C32;
-	border: none;
-	
+	border: none;	
 }
 
 a .button-right, a .button-left {

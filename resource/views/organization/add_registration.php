@@ -36,11 +36,15 @@
 							
 							<textarea name="description" class="form-control mb-2 add-desc" placeholder="Deskripsi" required></textarea>
 
+							<input type="number" name="max" class="form-control mb-2 add-title" placeholder="Batas Peserta (Isi 0 Bila tidak dibatasi)" required>
+
 							Jadwal Pendaftaran Dibuka :
 							<input type="date" name="start" class="form-control mb-2 add-title" placeholder="yyyy-mm-dd" title="Judul Maksimum 80 Karakter" required>
 
 							Jadwal Pendaftaran Ditutup :
 							<input type="date" name="end" class="form-control mb-2 add-title" placeholder="yyyy-mm-dd" title="Judul Maksimum 80 Karakter" required>
+
+
 							
 							<input type="checkbox" name="privacy"> <span class="add-priv"> Membutuhkan data private*</span>
 							

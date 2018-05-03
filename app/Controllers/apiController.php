@@ -87,6 +87,10 @@
         $check_member = $this->Model('Member')->select()
                              ->where('id_registration', $id_registration)
                              ->where('nim', $nim)->execute();
+     
+        $members      = $this->model('Member')->select()
+                             ->where('id_registration', $id_registration)
+                             ->execute();           
 
         $registration = $this->Model('Registration')->select()
                              ->where('id', $id_registration)->execute();
@@ -96,13 +100,15 @@
           if($registration->url != "") $this->sendingWebHook(Security::decrypt($registration->url), $member);
 
           if(empty($check_member)){
-            $insert = $this->model('Member')->insert([
-                  "nim" => $nim,
-                  "id_registration" => $id_registration,
-                ])->execute();
+            if(sizeof($members) != $registration->max_peserta){
+              $insert = $this->model('Member')->insert([
+                    "nim" => $nim,
+                    "id_registration" => $id_registration,
+                  ])->execute();
 
-            if($insert) $this->response(1);
-            else $this->response(0);
+              if($insert) $this->response(1);
+              else $this->response(0);
+            } else $this->response(3); 
           } else $this->response(2);
         } else $this->response(404);
       } else $this->response(404);

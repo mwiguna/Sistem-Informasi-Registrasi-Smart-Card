@@ -67,20 +67,20 @@
 								<td><?= $event->name ?></td>
 								<td>
 									<?php 
-									if($diffStart < 0){
+									if($diffStart < 1){
 										if($diffLeft < 0){ 
 											?>
 											<div style="color: red">Pendaftaran sudah tutup</div>
 
-											<?php } else { ?>
+										<?php } else { ?>
 
 											<a href="<?= url('pendaftaran_event/'. Security::encrypt($event->id)) ?>"><button class="button-small-4 button-blue">Daftar</button></a>
 
-											<?php } } else { ?>
+										<?php } } else { ?>
 
 											<div style="color: green">Pendaftaran dibuka pada <?= date('j F Y', strtotime($event->start_date)) ?></div>
 
-											<?php } ?>
+									<?php } ?>
 										</td>
 									</tr>
 
