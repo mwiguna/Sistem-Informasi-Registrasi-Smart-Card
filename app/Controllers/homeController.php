@@ -39,7 +39,7 @@ class homeController extends Controller {
   }
 
   public function events(){
-    $events = $this->model()->raw("SELECT *, registrations.id AS id FROM registrations JOIN organizations WHERE organizations.id = registrations.id_organization ORDER BY registrations.start_date DESC")->get();
+    $events = $this->model()->raw("SELECT *, registrations.id AS id FROM registrations JOIN organizations WHERE organizations.id = registrations.id_organization AND ((registrations.privacy = 1 AND registrations.verify = 1) OR registrations.privacy = 0) ORDER BY registrations.start_date DESC")->get();
 
     return $this->view('page/events', ['events' => $events]);
   }
@@ -59,6 +59,8 @@ class homeController extends Controller {
     echo $this->view('page/realtime', ['nim' => $nim, 'registrasi' => $registrasi, 'webhook' => $webhook]);
   }
   
+  /* --------- WebHook Checker -------- */
+
   public function getWebhook(){
    var_dump($_POST);
   }

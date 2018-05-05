@@ -150,7 +150,7 @@
     }
 
     
-    /* ------------------------ */
+    /* ------------- External Resources ----------- */
 
     public function getStudentAPI($id, $nim){
       $registration = $this->Model('Registration')->select()->where('id', Security::decrypt($id))->execute();
