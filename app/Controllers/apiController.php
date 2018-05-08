@@ -96,21 +96,23 @@
                              ->where('id', $id_registration)->execute();
 
         if(!empty($registration)){
-          $member = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".$_POST['nim']."/".$registration->privacy));
-          if($registration->url != "") $this->sendingWebHook(Security::decrypt($registration->url), $member);
+          if(($registration->privacy == 1 && $registration->verify == 1) || $registration->privacy == 0){
+            $member = json_decode(file_get_contents($GLOBALS['siakad_url']."api/getStudent/".$_POST['nim']."/".$registration->privacy));
+            if($registration->url != "") $this->sendingWebHook(Security::decrypt($registration->url), $member);
 
-          if(empty($check_member)){
-            if(sizeof($members) != $registration->max_peserta){
-              $insert = $this->model('Member')->insert([
-                    "nim" => $nim,
-                    "id_registration" => $id_registration,
-                  ])->execute();
+            if(empty($check_member)){
+              if((sizeof($members) != $registration->max_peserta) || ($registration->max_peserta == 0) ){
+                $insert = $this->model('Member')->insert([
+                      "nim" => $nim,
+                      "id_registration" => $id_registration,
+                    ])->execute();
 
-              if($insert) $this->response(1);
-              else $this->response(0);
-            } else $this->response(3); 
-          } else $this->response(2);
-        } else $this->response(404);
+                if($insert) $this->response(1);
+                else $this->response(0);
+              } else $this->response(3); 
+            } else $this->response(2);
+          } else $this->response(0); 
+        } else $this->response(0);
       } else $this->response(404);
     }
 
